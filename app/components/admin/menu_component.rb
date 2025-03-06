@@ -10,6 +10,7 @@ class Admin::MenuComponent < ApplicationComponent
       (polls_link if feature?(:polls)),
       (legislation_link if feature?(:legislation)),
       (budgets_link if feature?(:budgets)),
+      (projects_link if feature?(:projects)),
       booths_links,
       (signature_sheets_link if feature?(:signature_sheets)),
       messages_links,
@@ -98,6 +99,10 @@ class Admin::MenuComponent < ApplicationComponent
       controller_name == "managers" && controller.class.module_parent == Admin
     end
 
+    def projects?
+      controller_name == "projects"
+    end
+
     def proposals_link
       [
         t("admin.menu.proposals"),
@@ -149,6 +154,15 @@ class Admin::MenuComponent < ApplicationComponent
         admin_budgets_path,
         budgets?,
         class: "budgets-link"
+      ]
+    end
+
+    def projects_link
+      [
+        t("admin.menu.projects"),
+        admin_projects_path,
+        projects?,
+        class: "projects-link"
       ]
     end
 

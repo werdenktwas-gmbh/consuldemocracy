@@ -1543,7 +1543,8 @@ $font-awesome-icons: (
   }
 
   .show-link,
-  .preview-link {
+  .preview-link,
+  .public-link {
     @include has-fa-icon(eye, regular);
   }
 

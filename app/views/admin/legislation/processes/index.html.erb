@@ -40,7 +40,13 @@
             <td class="text-center"><%= process.sdg_goal_list %></td>
             <td class="text-center"><%= process.sdg_target_list %></td>
           <% end %>
-          <td><%= render Admin::TableActionsComponent.new(process) %></td>
+          <td>
+              <%= render Admin::TableActionsComponent.new(
+                process,
+                public_path: legislation_process_path(process),
+                actions: [:destroy, :edit, :public]
+              ) %>
+          </td>
         </tr>
       <% end %>
     </tbody>

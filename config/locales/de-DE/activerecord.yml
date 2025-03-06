@@ -145,6 +145,12 @@ de:
       local_census_record:
         one: Import von Datensatz aus dem Melderegister
         other: Import von Datensätzen aus dem Melderegister
+      project:
+        one: Projekt
+        other: Projekte
+      project/phase:
+        one: Projektphase
+        other: Projektphasen
     attributes:
       budget:
         name: "Name"
@@ -300,6 +306,7 @@ de:
         geozone_restricted: "Beschränkt auf Gebiete"
         summary: "Zusammenfassung"
         description: "Beschreibung"
+        preliminary_results: "Zwischenergebnisse für Admins anzeigen"
       active_poll/translation:
         description: "Beschreibung"
       poll/booth:
@@ -323,6 +330,11 @@ de:
         officer_assignment_id: Zuordnung Verwaltung
       poll/shift:
         task: "Aufgabe"
+      poll/question/option:
+        open_text: "Freitext-Antwort abfragen"
+      poll/question/option/translation:
+        title: Antwort
+        description: "Beschreibung (optional)"
       proposal_notification:
         body: "Nachricht"
         title: "Titel"
@@ -516,6 +528,39 @@ de:
       votation_type/vote_type:
         unique: "Eindeutige Antwort\n"
         multiple: Mehrere Antworten
+        essay: Freitext-Antwort
+      project:
+        title: "Titel"
+        slug: "Url-Pfad"
+        created_at: "Erstellt"
+        updated_at: "Aktualisiert"
+        state: "Status"
+        teaser: "Teaser text"
+        content: "Beschreibung"
+      project/translation:
+        title: "Titel"
+        teaser: "Teasertext für Startseite"
+        content: "Beschreibung"
+      project/state:
+        active: "Aktiv"
+        draft: "Entwurf"
+        archived: "Archiviert"
+      project/phase:
+        enabled: "Phase sichtbar"
+        starts_at: "Von (optional)"
+        ends_at: "Bis (optional)"
+        order: "Reihenfolge"
+        created_at: "Erstellt"
+        updated_at: "Aktualisiert"
+        title: "Titel"
+        title_short: "Kurztitel"
+        subtitle: "Untertitel"
+        content: "Beschreibung"
+      project/phase/translation:
+        title: "Titel"
+        title_short: "Kurztitel (für Reiter)"
+        content: "Beschreibung"
+        subtitle: "Untertitel (optional)"
     errors:
       models:
         user:

@@ -1,0 +1,25 @@
+<nav>
+  <ul>
+    <%= raw content_block("subnavigation_left") %>
+
+    <% if feature?(:proposals) %>
+      <li>
+        <%= layout_menu_link_to t("layouts.header.proposals"),
+                                proposals_path,
+                                controller.class == ProposalsController,
+                                accesskey: "2" %>
+      </li>
+    <% end %>
+
+    <% if feature?(:help_page) %>
+      <li>    
+        <%= layout_menu_link_to t("layouts.header.help"),
+                                faq_path,
+                                controller_name == "pages",
+                                accesskey: "7" %>
+      </li>
+    <% end %>
+
+    <%= raw content_block("subnavigation_right") %>
+  </ul>
+</nav>

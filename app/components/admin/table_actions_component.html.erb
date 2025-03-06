@@ -8,4 +8,8 @@
   <% if actions.include?(:destroy) %>
     <%= action(:destroy, **destroy_options.merge(text: destroy_text, path: destroy_path)) %>
   <% end %>
+
+  <% if actions.include?(:public) %>
+    <%= action(:public, **public_options.merge(text: public_text, path: public_path)) %>
+  <% end %>
 </div>

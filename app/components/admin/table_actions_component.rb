@@ -41,4 +41,16 @@ class Admin::TableActionsComponent < ApplicationComponent
         confirm: options[:destroy_confirmation] || true
       }.merge(options[:destroy_options] || {})
     end
+
+    def public_text
+      options[:public_text]
+    end
+
+    def public_path
+      options[:public_path]
+    end
+
+    def public_options
+      options[:public_options] || {}
+    end
 end

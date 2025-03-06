@@ -11,7 +11,8 @@ class Admin::Budgets::TableActionsComponent < ApplicationComponent
       Admin::TableActionsComponent.new(
         budget,
         edit_path: admin_budget_path(budget),
-        actions: [:edit]
+        public_path: budget_path(budget),
+        actions: [:edit, :public]
       )
     end
 end

@@ -9,7 +9,9 @@
   <td>
     <%= render Admin::TableActionsComponent.new(
       poll,
-      destroy_confirmation: t("admin.polls.destroy.alert")
+      destroy_confirmation: t("admin.polls.destroy.alert"),
+      public_path: poll_path(poll),
+      actions: [:destroy, :edit, :public]
     ) do |actions| %>
       <%= actions.action(:configure) %>
     <% end %>

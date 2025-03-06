@@ -109,6 +109,10 @@
     &.ml-link {
       @include icon(brain, solid);
     }
+
+    &.projects-link {
+      @include icon(folder-open, solid);
+    }
   }
 
   li {

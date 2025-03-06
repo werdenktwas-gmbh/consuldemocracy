@@ -83,6 +83,8 @@ de:
     direct_message_max_per_day: "Maximale Anzahl direkter Nachrichten per Tag"
     direct_message_max_per_day_description: "Maximale Anzahl direkter Nachrichten, die Benutzer*innen am Tag senden können"
     feature:
+      remote_deepl_translations: "DeepL-Übersetzung"
+      remote_deepl_translations_description: "Übersetzung durch DeepL erlauben"
       twitter_login: "Twitter login"
       twitter_login_description: "Anmeldung mit Twitter-Account erlauben"
       facebook_login: "Facebook login"
@@ -134,6 +136,8 @@ de:
       remove_investments_supports_description: "Ermöglicht es den Nutzern, in der Phase der Projektauswahl Unterstützungen für Investitionen in Bürgerhaushalte zu entfernen."
       sdg: SDG
       sdg_description: Aktivieren Sie die Abschnitte über die Ziele für nachhaltige Entwicklung im Verwaltungsmenü und in den globalen Einstellungen.
+      projects: "Projekte"
+      projects_description: "Aktivieren Sie Projekte um eine zentrale Übersichtsseite für Projekte und individuelle Projektphasen verwalten zu können."
     remote_census:
       general:
         endpoint: "Endpunkt"

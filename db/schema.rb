@@ -1,4 +1,4 @@
-# This file is auto-generated from the current state of the database. Instead
+## This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_13_135357) do
+ActiveRecord::Schema[7.0].define(version: 2024_11_21_140153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
   enable_extension "plpgsql"
@@ -1025,6 +1025,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_135357) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.bigint "option_id"
+    t.string "text_answer"
     t.index ["author_id"], name: "index_poll_answers_on_author_id"
     t.index ["option_id", "author_id"], name: "index_poll_answers_on_option_id_and_author_id", unique: true
     t.index ["option_id"], name: "index_poll_answers_on_option_id"
@@ -1123,6 +1124,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_135357) do
     t.integer "question_id"
     t.integer "given_order", default: 1
     t.boolean "most_voted", default: false
+    t.boolean "open_text", default: false
     t.index ["question_id"], name: "index_poll_question_answers_on_question_id"
   end
 
@@ -1238,6 +1240,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_135357) do
     t.string "related_type"
     t.integer "related_id"
     t.tsvector "tsv"
+    t.boolean "preliminary_results", default: false
     t.index ["budget_id"], name: "index_polls_on_budget_id", unique: true
     t.index ["geozone_restricted"], name: "index_polls_on_geozone_restricted"
     t.index ["related_type", "related_id"], name: "index_polls_on_related_type_and_related_id"
@@ -1261,6 +1264,54 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_135357) do
     t.integer "progressable_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "project_phase_translations", force: :cascade do |t|
+    t.bigint "project_phase_id", null: false
+    t.string "locale", null: false
+    t.string "title"
+    t.string "title_short"
+    t.string "subtitle"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale"], name: "index_project_phase_translations_on_locale"
+    t.index ["project_phase_id"], name: "index_project_phase_translations_on_project_phase_id"
+  end
+
+  create_table "project_phases", force: :cascade do |t|
+    t.bigint "project_id"
+    t.integer "order", default: 1, null: false
+    t.boolean "enabled", default: true
+    t.datetime "starts_at"
+    t.datetime "ends_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enabled"], name: "index_project_phases_on_enabled"
+    t.index ["ends_at"], name: "index_project_phases_on_ends_at"
+    t.index ["order"], name: "index_project_phases_on_order"
+    t.index ["project_id"], name: "index_project_phases_on_project_id"
+    t.index ["starts_at"], name: "index_project_phases_on_starts_at"
+  end
+
+  create_table "project_translations", force: :cascade do |t|
+    t.bigint "project_id", null: false
+    t.string "locale", null: false
+    t.string "title"
+    t.text "teaser"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["locale"], name: "index_project_translations_on_locale"
+    t.index ["project_id"], name: "index_project_translations_on_project_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "state", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["state"], name: "index_projects_on_state"
   end
 
   create_table "proposal_notifications", id: :serial, force: :cascade do |t|
@@ -1515,6 +1566,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_13_135357) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.string "locale"
+    t.boolean "in_navigation", default: false
   end
 
   create_table "taggings", id: :serial, force: :cascade do |t|

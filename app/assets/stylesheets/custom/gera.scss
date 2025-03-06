@@ -1,0 +1,26 @@
+:root {
+    --primary: #ffc20d;
+    --border-radius: 0.3rem;
+}
+
+
+.top-links {
+    > :first-child {
+        flex-grow: 1;
+    }
+    .custom-title {
+        display:none;
+    }
+    @include breakpoint(large) {
+        > :first-child {
+            flex-grow: 0;
+        }
+        .custom-title {
+            margin-left: 10px;
+            display:flex;
+            align-items: center;
+            flex-grow: 1;
+            font-weight: bold;
+        }
+    }
+}

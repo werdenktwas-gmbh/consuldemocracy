@@ -35,6 +35,7 @@ tmp/
 # Files used in local development
 .byebug_history
 .DS_Store
+.arcconfig
 
 # Test results
 /spec/examples.txt

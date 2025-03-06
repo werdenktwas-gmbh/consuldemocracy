@@ -760,6 +760,7 @@ uk-UA:
       select_language_prompt: Обрати мову
       remove_language: Видалити мову
       add_language: Додати мову
+      remote_deepl_translation_info: Тексти автоматично перекладаються на всі доступні мови за допомогою DeepL
       languages_in_use:
         zero: "Використовуються 0 мов"
         one: "Використовується 1 мова"

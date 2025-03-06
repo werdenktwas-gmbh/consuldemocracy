@@ -1,3 +1,4 @@
+require "deep_l_translation_service"
 module Globalizable
   MIN_TRANSLATIONS = 1
   extend ActiveSupport::Concern
@@ -8,6 +9,13 @@ module Globalizable
 
     validate :check_translations_number, on: :update, if: :translations_required?
     after_validation :copy_error_to_current_translation, on: :update
+
+    after_save :remote_translation
+    def remote_translation
+      if Setting["feature.remote_deepl_translations"].presence && api_key_has_been_set_in_secrets?
+        DeepLTranslationService.delay.auto_translate_with_deepl(self)
+      end
+    end
 
     def locales_not_marked_for_destruction
       translations.reject(&:marked_for_destruction?).map(&:locale)
@@ -26,6 +34,10 @@ module Globalizable
     end
 
     private
+
+      def api_key_has_been_set_in_secrets?
+        Tenant.current_secrets.deepl_api_key.present?
+      end
 
       def required_attribute?(attribute)
         self.class.validators_on(attribute).any? do |validator|
