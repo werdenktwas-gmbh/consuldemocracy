@@ -7,7 +7,7 @@
   width: $icon-width;
 
   &::before {
-    font-size: calc(#{$icon-width} / 2);
+    font-size: calc($icon-width / 2);
     margin-right: 0;
   }
 
@@ -26,7 +26,6 @@
     color: #40a2d1;
   }
 }
-
 
 .ssb-facebook {
   @include has-fa-icon(facebook-f, brands);

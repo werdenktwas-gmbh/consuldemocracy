@@ -4,6 +4,7 @@ class Management::Budgets::InvestmentsController < Management::BaseController
   include DocumentAttributes
   include MapLocationAttributes
   include FeatureFlags
+
   feature_flag :budgets
 
   before_action :load_budget
@@ -26,8 +27,8 @@ class Management::Budgets::InvestmentsController < Management::BaseController
     @investment.heading = @budget.headings.first if @budget.single_heading?
 
     if @investment.save
-      notice = t("flash.actions.create.notice", resource_name: Budget::Investment.model_name.human, count: 1)
-      redirect_to management_budget_investment_path(@budget, @investment), notice: notice
+      redirect_to management_budget_investment_path(@budget, @investment),
+                  notice: t("flash.actions.create.budget_investment")
     else
       render :new
     end

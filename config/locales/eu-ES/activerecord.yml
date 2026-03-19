@@ -188,7 +188,6 @@ eu:
         official_position: "Kargu publikoa"
         official_level: "Kargu maila"
         phone_number: "Telefonoa"
-        redeemable_code: "Eskutitz bidezko egiaztapen kodea (aukerakoa)"
       direct_message:
         title: "Izenburua"
       organization:
@@ -386,8 +385,6 @@ eu:
           attributes:
             document_number:
               not_in_census: "Agiri hau ez da erroldan ageri"
-            user_id:
-              has_voted: "Erabiltzailea honek bozkatu du"
         legislation/process:
           attributes:
             end_date:

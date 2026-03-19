@@ -338,7 +338,6 @@ ast:
       forward:
         support_button: Apoyar esta propuesta
   polls:
-    all: "Toes"
     dates: "Desde el %{open_at} hasta el %{closed_at}"
     final_date: "Recuento final/Resultados"
     index:
@@ -368,10 +367,6 @@ ast:
       info_menu: "Información"
       results:
         title: "Entruges"
-  poll_questions:
-    show:
-      vote_answer: "Votar %{answer}"
-      voted: "Has votado %{answer}"
   proposal_notifications:
     new:
       title: "Enviar mensaje"

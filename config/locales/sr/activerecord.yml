@@ -308,7 +308,6 @@ sr:
         public_interests: "Задржи етикете елемената које пратим"
         recommended_debates: "Покажи препоруке за дебате"
         recommended_proposals: "Покажи препоруке за предлоге"
-        redeemable_code: "Верификациони код примљен путем емаила"
       direct_message:
         title: "Наслов"
         body: "Порука"
@@ -551,8 +550,6 @@ sr:
           attributes:
             document_number:
               not_in_census: "Документ није у попису"
-            user_id:
-              has_voted: "Корисник је већ гласао"
         legislation/process:
           attributes:
             end_date:

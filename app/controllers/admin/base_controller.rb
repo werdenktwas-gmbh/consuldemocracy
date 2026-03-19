@@ -1,4 +1,6 @@
 class Admin::BaseController < ApplicationController
+  include IpDeniedHandler
+
   layout "admin"
   before_action :authenticate_user!
 

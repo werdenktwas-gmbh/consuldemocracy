@@ -267,7 +267,6 @@ ca:
         public_interests: "Guardeu les etiquetes dels elements que segueixo públics"
         recommended_debates: "Mostra recomanacions de debats"
         recommended_proposals: "Mostra recomanacions de propostes"
-        redeemable_code: "Codi de verificació per carta (opcional)"
       direct_message:
         title: "Títol"
         body: "Missatge"
@@ -510,8 +509,6 @@ ca:
           attributes:
             document_number:
               not_in_census: "Este documento no aparece en el censo"
-            user_id:
-              has_voted: "L'usuari ja ha votat"
         legislation/process:
           attributes:
             end_date:

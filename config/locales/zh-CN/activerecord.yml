@@ -195,7 +195,6 @@ zh-CN:
         public_activity: "将我的活动列表公开"
         recommended_debates: "显示辩论推荐"
         recommended_proposals: "显示提议推荐"
-        redeemable_code: "通过电子邮件接收到的验证码"
       direct_message:
         title: "标题"
         body: "信息"
@@ -413,8 +412,6 @@ zh-CN:
           attributes:
             document_number:
               not_in_census: "不在人口普查中的文档"
-            user_id:
-              has_voted: "用户已经投票"
         legislation/process:
           attributes:
             end_date:

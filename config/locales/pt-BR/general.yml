@@ -555,7 +555,6 @@ pt-BR:
         support: "Você apenas precisa clicar no botão 'Apoiar esta proposta' logo abaixo para se informar sobre ela antes de apoiá-la. Somente as propostas que conseguirem o máximo de apoio serão executadas pela Prefeitura. Assim, tenho certeza que você me ajudará!"
         share: "E se você fizer o grande favor de compartilhar a minha proposta com seus amigos, familiares e contatos, vai ser ótimo!"
   polls:
-    all: "Tudo"
     dates: "De %{open_at} para %{closed_at}"
     final_date: "Contagem final/resultados"
     index:
@@ -614,10 +613,6 @@ pt-BR:
         most_voted_answer: "Resposta mais votada: "
     poll_header:
       back_to_proposal: Voltar à proposta
-  poll_questions:
-    show:
-      vote_answer: "Votar %{answer}"
-      voted: "Você votou %{answer}"
   proposal_notifications:
     new:
       title: "Enviar mensagem"
@@ -723,7 +718,6 @@ pt-BR:
       see_more: Ver mais recomendações
       hide: Ocultar recomendações
     translations:
-      select_language_prompt: Selecionar idioma
       remove_language: Remover idioma
       add_language: E o idioma
       languages_in_use:

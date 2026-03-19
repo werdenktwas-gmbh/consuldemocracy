@@ -88,7 +88,6 @@ en:
         confidence_score: highest rated
         created_at: newest
         hot_score: most active
-        most_commented: most commented
         relevance: relevance
         recommendations: recommendations
       recommendations:
@@ -198,6 +197,7 @@ en:
       consul: CONSUL DEMOCRACY application
       consul_url: https://github.com/consuldemocracy/consuldemocracy
       copyright: CONSUL DEMOCRACY, %{year}
+      cookies_consent_management: Manage cookies
       description: This portal uses the %{consul} which is %{open_source}.
       open_source: open-source software
       open_source_url: http://www.gnu.org/licenses/agpl-3.0.html
@@ -278,6 +278,14 @@ en:
     info:
       sign_in: "Sign in with:"
       sign_up: "Sign up with:"
+    saml:
+      sign_in: Sign in with SAML
+      sign_up: Sign up with SAML
+      name: SAML
+    oidc:
+      sign_in: Sign in with OIDC
+      sign_up: Sign up with OIDC
+      name: OIDC
     or_fill: "Or fill the following form:"
   proposals:
     create:
@@ -321,6 +329,7 @@ en:
       tags_placeholder: "Enter the tags you would like to use, separated by commas (',')"
       map_location: "Map location"
       map_location_instructions: "Navigate the map to the location and place the marker."
+      map_marker_coordinates: "Latitude: %{latitude}. Longitude: %{longitude}"
       map_remove_marker: "Remove map marker"
     index:
       featured_proposals: Featured
@@ -475,6 +484,8 @@ en:
       see_proposed_actions: Check out recommended actions
       hide_proposed_actions: Hide recommended actions
       pending_title: Pending
+      execute: "Mark %{name} as done"
+      unexecute: "Unmark %{name} as done"
       show_description: Show description
       without_pending_actions: No recommended actions pending
       done_title: Done
@@ -569,9 +580,11 @@ en:
         support: "You just have to click on the button that you will see below 'Support this proposal' and you can inform yourself about before promoting it. Only the proposals that achieve the maximum support will be carried out by the City Council, and I thought that you, I'm sure you help me achieve it!"
         share: "And if you also do me the great favor of sharing my proposal with your friends, family and contacts, it would be perfect!"
   polls:
-    all: "All"
     dates: "From %{open_at} to %{closed_at}"
     final_date: "Final recounts/Results"
+    form:
+      vote: "Vote"
+      maximum_exceeded: "you've selected %{given} answers, but the maximum you can select is %{maximum}"
     index:
       filters:
         current: "Open"
@@ -597,6 +610,7 @@ en:
     show:
       already_voted_in_booth: "You have already participated in a physical booth. You can not participate again."
       already_voted_in_web: "You have already participated in this poll. If you vote again it will be overwritten."
+      already_voted_blank_in_web: "You have already participated in this poll by casting a blank vote. If you vote again it will be overwritten."
       back: Back to voting
       cant_answer_not_logged_in: "You must %{signin} or %{signup} to participate."
       comments_tab: Comments
@@ -629,6 +643,9 @@ en:
         most_voted_answer: "Most voted answer: "
         no_valid_open_text_answers: "No open text answers submitted"
         open_text_answers: "Open text answers"
+        open_ended:
+          valid: Valid
+          blank: Blank
     poll_header:
       back_to_proposal: Back to proposal
     answers:
@@ -636,11 +653,7 @@ en:
         success_notice: "Your votes were submitted successfully"
         rollback_notice: "An error occured while submitting your votes, please try again."
   poll_questions:
-    show:
-      vote_answer: "Vote %{answer}"
-      voted: "You have voted %{answer}"
     description:
-      unique: "You can select a maximum of 1 answer."
       multiple: "You can select a maximum of %{maximum} answers."
     read_more_about: "Read more about:"
   proposal_notifications:
@@ -652,6 +665,8 @@ en:
     show:
       back: "Go back to my content"
   shared:
+    actions:
+      label: "%{action} %{name}"
     edit: "Edit"
     filter: "Filter"
     save: "Save"
@@ -748,7 +763,7 @@ en:
         see_more: See more recommendations
         hide: Hide recommendations
     translations:
-      select_language_prompt: Choose language
+      current_language: Current language
       remove_language: Remove language
       add_language: Add language
       remote_deepl_translation_info: Texts are automatically translated into all available languages using DeepL
@@ -768,6 +783,8 @@ en:
     youtube: "%{org} YouTube"
     telegram: "%{org} Telegram"
     instagram: "%{org} Instagram"
+  ip_denied_handler:
+    unauthorized: "Access denied. Your IP address is not allowed."
   unauthorized:
     default: You do not have permission to access this page.
     manage:
@@ -957,3 +974,21 @@ en:
       back: "Back to list of projects"
     tabs:
       homepage: "Homepage"
+  cookies_consent:
+    accept_all_cookies: "Accept all"
+    accept_essential_cookies: "Accept essential cookies"
+    message: "Cookies help us deliver our services. By using our services, you agree to our use of cookies."
+    more_info_link: "More information about cookies"
+    management: "Manage cookies"
+    title: "Cookies policy"
+  cookies_management:
+    title: Cookies management
+    description: This website uses own and third party cookies for its proper functioning. By clicking the Accept all button, you agree to the use of these technologies and the processing of your data for these purposes.
+    essentials:
+      title: Essential cookies
+      description: They are used for many different purposes, such as recognising you as a user, choosing the language or customising the way in which content is displayed.
+      hint: Without these, basic navigation functions will be impaired, so they should always be active.
+    third_party:
+      title: Third party cookies
+      description: This website use third-party cookies. These cookies can enhance functionality or collect information to improve your user experience.
+    save_preferences: Save preferences

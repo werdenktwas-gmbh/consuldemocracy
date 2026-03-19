@@ -1,13 +1,14 @@
 module Polls
-  def vote_for_poll_via_web(poll, question, option)
+  def vote_for_poll_via_web(poll, questions_with_options)
     visit poll_path(poll)
 
-    within("#poll_question_#{question.id}_options") do
-      click_button option
-
-      expect(page).to have_button("You have voted #{option}")
-      expect(page).not_to have_button("Vote #{option}")
+    questions_with_options.each do |question, option|
+      within_fieldset(question.title) { choose option }
     end
+
+    click_button "Vote"
+
+    expect(page).to have_content "Thank you for voting!"
   end
 
   def vote_for_poll_via_booth
@@ -18,19 +19,15 @@ module Polls
 
     first(:button, "Confirm vote").click
     expect(page).to have_content "Vote introduced!"
-
-    expect(Poll::Voter.count).to eq(1)
   end
 
-  def confirm_phone(user = nil)
-    user ||= User.last
-
+  def confirm_phone(code:)
     fill_in "sms_phone", with: "611111111"
     click_button "Send"
 
     expect(page).to have_content "Enter the confirmation code sent to you by text message"
 
-    fill_in "sms_confirmation_code", with: user.reload.sms_confirmation_code
+    fill_in "sms_confirmation_code", with: code
     click_button "Send"
 
     expect(page).to have_content "Code correct"

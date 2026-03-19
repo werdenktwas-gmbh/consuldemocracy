@@ -1,30 +1,109 @@
 class Polls::Questions::QuestionComponent < ApplicationComponent
-  attr_reader :question
+  attr_reader :question, :form, :disabled
   use_helpers :can?, :current_user
+  alias_method :disabled?, :disabled
 
-  def initialize(question:)
+  def initialize(question, form:, disabled: false)
     @question = question
+    @form = form
+    @disabled = disabled
   end
 
-  def options_read_more_links
-    safe_join(question.options_with_read_more.map do |option|
-      if option.question.essay?
-        link_to question.title, "#option_#{option.id}"
-      else
-        link_to option.title, "#option_#{option.id}"
-      end
-    end, ", ")
-  end
+# <<<<<<< HEAD
+#   def options_read_more_links
+#     safe_join(question.options_with_read_more.map do |option|
+#       if option.question.essay?
+#         link_to question.title, "#option_#{option.id}"
+#       else
+#         link_to option.title, "#option_#{option.id}"
+#       end
+#     end, ", ")
+#   end
 
-  def checked?(question, option)
-    question.answers.where(author: current_user, option: option).any?
-  end
+#   def checked?(question, option)
+#     question.answers.where(author: current_user, option: option).any?
+#   end
 
-  def existing_answer(question, option)
-    answer = question.answers.where(author: current_user, option: option).first
-    if answer && answer.text_answer?
-      return answer.text_answer
+#   def existing_answer(question, option)
+#     answer = question.answers.where(author: current_user, option: option).first
+#     if answer && answer.text_answer?
+#       return answer.text_answer
+#     end
+#     return ""
+#   end
+# =======
+  private
+
+    def fieldset_attributes
+      tag.attributes(
+        id: dom_id(question),
+        disabled: ("disabled" if disabled?),
+        class: fieldset_class,
+        data: { max_votes: question.max_votes }
+      )
     end
-    return ""
-  end
+
+    def fieldset_class
+      if multiple_choice?
+        "multiple-choice"
+      else
+        "single-choice"
+      end
+    end
+
+    def options_read_more_links
+      safe_join(question.options_with_read_more.map do |option|
+        link_to option.title, "#option_#{option.id}"
+      end, ", ")
+    end
+
+    # def existing_answer
+    #   form.object.answers[question.id]&.first&.answer
+    # end
+    def existing_answer(question, option)
+      answer = question.answers.where(author: current_user, option: option).first
+      if answer && answer.text_answer?
+        return answer.text_answer
+      end
+      return ""
+    end
+
+    def multiple_choice?
+      question.multiple?
+    end
+
+    def multiple_choice_help_text
+      tag.span(
+        t("poll_questions.description.multiple", maximum: question.max_votes),
+        class: "help-text"
+      )
+    end
+
+    def multiple_choice_field(option)
+      choice_field(option) do
+        check_box_tag "web_vote[#{question.id}][option_id][]",
+                      option.id,
+                      checked?(option),
+                      id: "web_vote_option_#{option.id}"
+      end
+    end
+
+    def single_choice_field(option)
+      choice_field(option) do
+        radio_button_tag "web_vote[#{question.id}][option_id]",
+                         option.id,
+                         checked?(option),
+                         id: "web_vote_option_#{option.id}"
+      end
+    end
+
+    def choice_field(option, &block)
+      label_tag("web_vote_option_#{option.id}") do
+        block.call + option.title
+      end
+    end
+
+    def checked?(option)
+      form.object.answers[question.id].find { |answer| answer.option_id == option.id }
+    end
 end

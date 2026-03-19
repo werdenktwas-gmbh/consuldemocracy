@@ -15,11 +15,11 @@ env:
 
 jobs:
   tests:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     services:
       postgres:
-        image: postgres:13.16
+        image: postgres:14.19
         ports: ["5432:5432"]
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
         env:
@@ -35,17 +35,27 @@ jobs:
         ci_node_total: [5]
         ci_node_index: [0, 1, 2, 3, 4]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
       - name: Setup NPM
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           cache: "npm"
           node-version-file: ".node-version"
       - name: Install node packages
         run: npm clean-install
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install imagemagick
+      - name: Remove image-bundled Chrome
+        run: sudo apt-get purge google-chrome-stable
+      - name: Setup Chrome/Chromium 128
+        uses: browser-actions/setup-chrome@v2
+        with:
+          chrome-version: 128
+          install-chromedriver: true
+          install-dependencies: true
       - name: Copy secrets and database files
         run: for i in config/*.example; do cp "$i" "${i/.example}"; done
       - name: Setup database
@@ -69,14 +79,14 @@ jobs:
           parallel: true
       - name: Upload screenshots
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: screenshots-${{ matrix.ci_node_index }}
           path: tmp/capybara/
   coveralls:
     permissions:
       contents: none
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: tests
     steps:
       - name: Finish coveralls

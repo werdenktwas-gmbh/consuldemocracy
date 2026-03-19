@@ -3,7 +3,7 @@ class Legislation::Annotation < ApplicationRecord
   acts_as_paranoid column: :hidden_at
   include ActsAsParanoidAliases
 
-  serialize :ranges, Array
+  serialize :ranges, type: Array
 
   belongs_to :draft_version, foreign_key: "legislation_draft_version_id", inverse_of: :annotations
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :legislation_annotations
@@ -25,23 +25,21 @@ class Legislation::Annotation < ApplicationRecord
   end
 
   def store_context
-    begin
-      html = draft_version.body_html
-      doc = Nokogiri::HTML(html)
+    html = draft_version.body_html
+    doc = Nokogiri::HTML(html)
 
-      selector_start = "/html/body/#{range_start}"
-      el_start = doc.at_xpath(selector_start)
+    selector_start = "/html/body/#{range_start}"
+    el_start = doc.at_xpath(selector_start)
 
-      selector_end = "/html/body/#{range_end}"
-      el_end = doc.at_xpath(selector_end)
+    selector_end = "/html/body/#{range_end}"
+    el_end = doc.at_xpath(selector_end)
 
-      remainder_el_start = el_start.text[0..range_start_offset - 1] unless range_start_offset.zero?
-      remainder_el_end = el_end.text[range_end_offset..-1]
+    remainder_el_start = el_start.text[0..range_start_offset - 1] unless range_start_offset.zero?
+    remainder_el_end = el_end.text[range_end_offset..-1]
 
-      self.context = "#{remainder_el_start}<span class=annotator-hl>#{quote}</span>#{remainder_el_end}"
-    rescue
-      "<span class=annotator-hl>#{quote}</span>"
-    end
+    self.context = "#{remainder_el_start}<span class=annotator-hl>#{quote}</span>#{remainder_el_end}"
+  rescue
+    "<span class=annotator-hl>#{quote}</span>"
   end
 
   def create_first_comment

@@ -3,7 +3,7 @@ class Admin::Poll::Questions::Options::TableActionsComponent < ApplicationCompon
 
   def initialize(option)
     @option = option
-    if option.question.essay?
+    if !option.question.accepts_options?
       @actions = [:edit]
     else
       @actions = [:edit, :destroy]

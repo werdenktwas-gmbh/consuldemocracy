@@ -8,12 +8,7 @@
   <%= render "shared/canonical", href: proposals_url %>
 <% end %>
 
-<% if [
-        @search_terms,
-        @advanced_search_terms,
-        params[:retired].present?,
-        params[:selected].present?
-      ].any? %>
+<% if [@search_terms, @advanced_search_terms, params[:retired].present?, params[:selected].present?].any? %>
   <%= render Shared::SearchResultsSummaryComponent.new(
     results: @proposals,
     search_terms: @search_terms,
@@ -30,9 +25,7 @@
 <% end %>
 
 <% if show_recommended_proposals? %>
-  <%= render "shared/recommended_index", recommended: @recommended_proposals,
-                                         disable_recommendations_path: recommendations_disable_proposals_path,
-                                         namespace: "proposals" %>
+  <%= render Shared::RecommendedIndexComponent.new(@recommended_proposals, namespace: "proposals") %>
 <% end %>
 
 <div class="row">

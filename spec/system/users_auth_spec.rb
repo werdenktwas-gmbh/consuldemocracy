@@ -62,11 +62,7 @@ describe "Users" do
       scenario "sign in with email" do
         create(:user, email: "manuela@consul.dev", password: "judgementday")
 
-        visit "/"
-        click_link "Sign in"
-        fill_in "Email or username", with: "manuela@consul.dev"
-        fill_in "Password", with: "judgementday"
-        click_button "Enter"
+        login_through_form_with("manuela@consul.dev", password: "judgementday")
 
         expect(page).to have_content "You have been signed in successfully."
       end
@@ -74,11 +70,7 @@ describe "Users" do
       scenario "Sign in with username" do
         create(:user, username: "中村広", email: "ash@nostromo.dev", password: "xenomorph")
 
-        visit "/"
-        click_link "Sign in"
-        fill_in "Email or username", with: "中村広"
-        fill_in "Password", with: "xenomorph"
-        click_button "Enter"
+        login_through_form_with("中村広", password: "xenomorph")
 
         expect(page).to have_content "You have been signed in successfully."
       end
@@ -87,28 +79,17 @@ describe "Users" do
         u1 = create(:user, username: "Spidey", email: "peter@nyc.dev", password: "greatpower")
         u2 = create(:user, username: "peter@nyc.dev", email: "venom@nyc.dev", password: "symbiote")
 
-        visit "/"
-        click_link "Sign in"
-        fill_in "Email or username", with: "peter@nyc.dev"
-        fill_in "Password", with: "greatpower"
-        click_button "Enter"
+        login_through_form_with("peter@nyc.dev", password: "greatpower")
 
         expect(page).to have_content "You have been signed in successfully."
-
-        visit account_path
-
         expect(page).to have_link "My content", href: user_path(u1)
 
-        visit "/"
-        click_link "Sign out"
+        within("#notice") { click_button "Close" }
+        click_button "Sign out"
 
         expect(page).to have_content "You have been signed out successfully."
 
-        within("#notice") { click_button "Close" }
-        click_link "Sign in"
-        fill_in "Email or username", with: "peter@nyc.dev"
-        fill_in "Password", with: "symbiote"
-        click_button "Enter"
+        login_through_form_with("peter@nyc.dev", password: "symbiote")
 
         expect(page).not_to have_content "You have been signed in successfully."
         expect(page).to have_content "Invalid Email or username or password."
@@ -127,103 +108,6 @@ describe "Users" do
   end
 
   context "OAuth authentication" do
-    context "Form buttons" do
-      before do
-        Setting["feature.facebook_login"] = false
-        Setting["feature.twitter_login"] = false
-        Setting["feature.google_login"] = false
-        Setting["feature.wordpress_login"] = false
-      end
-
-      scenario "No button will appear if all features are disabled" do
-        visit new_user_registration_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-
-        visit new_user_session_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-      end
-
-      scenario "Twitter login button will appear if feature is enabled" do
-        Setting["feature.twitter_login"] = true
-
-        visit new_user_registration_path
-
-        expect(page).to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-
-        visit new_user_session_path
-
-        expect(page).to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-      end
-
-      scenario "Facebook login button will appear if feature is enabled" do
-        Setting["feature.facebook_login"] = true
-
-        visit new_user_registration_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-
-        visit new_user_session_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-      end
-
-      scenario "Google login button will appear if feature is enabled" do
-        Setting["feature.google_login"] = true
-
-        visit new_user_registration_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-
-        visit new_user_session_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).to have_link "Google"
-        expect(page).not_to have_link "Wordpress"
-      end
-
-      scenario "Wordpress login button will appear if feature is enabled" do
-        Setting["feature.wordpress_login"] = true
-
-        visit new_user_registration_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).to have_link "Wordpress"
-
-        visit new_user_session_path
-
-        expect(page).not_to have_link "Twitter"
-        expect(page).not_to have_link "Facebook"
-        expect(page).not_to have_link "Google"
-        expect(page).to have_link "Wordpress"
-      end
-    end
-
     context "Twitter" do
       let(:twitter_hash) { { uid: "12345", info: { name: "manuela" }} }
       let(:twitter_hash_with_email) do
@@ -246,7 +130,7 @@ describe "Users" do
         visit "/"
         click_link "Register"
 
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect_to_be_signed_in
 
@@ -265,7 +149,7 @@ describe "Users" do
         visit "/"
         click_link "Register"
 
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(new_user_session_path)
         expect(page).to have_content "To continue, please click on the confirmation " \
@@ -276,7 +160,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Twitter"
+        click_button "Sign in with Twitter"
         expect_to_be_signed_in
 
         within("#notice") { click_button "Close" }
@@ -293,7 +177,7 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(finish_signup_path)
         fill_in "Email", with: "manueladelascarmenas@example.com"
@@ -307,7 +191,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Twitter"
+        click_button "Sign in with Twitter"
         expect_to_be_signed_in
 
         within("#notice") { click_button "Close" }
@@ -324,12 +208,16 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(finish_signup_path)
-        click_link "Cancel login"
+        click_button "Cancel login"
+
+        expect(page).to have_content "You have been signed out successfully"
 
         visit "/"
+
+        expect(page).not_to have_content "You have been signed out successfully"
         expect_not_to_be_signed_in
       end
 
@@ -340,7 +228,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Twitter"
+        click_button "Sign in with Twitter"
 
         expect_to_be_signed_in
 
@@ -359,7 +247,7 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(finish_signup_path)
 
@@ -387,7 +275,7 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(finish_signup_path)
         expect(page).to have_field "Username", with: "manuela"
@@ -408,7 +296,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Twitter"
+        click_button "Sign in with Twitter"
 
         within("#notice") { click_button "Close" }
         click_link "My account"
@@ -424,7 +312,7 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(finish_signup_path)
 
@@ -444,7 +332,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Twitter"
+        click_button "Sign in with Twitter"
         expect_to_be_signed_in
 
         within("#notice") { click_button "Close" }
@@ -462,7 +350,7 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Twitter"
+        click_button "Sign up with Twitter"
 
         expect(page).to have_current_path(finish_signup_path)
 
@@ -478,7 +366,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Twitter"
+        click_button "Sign in with Twitter"
         expect_to_be_signed_in
 
         within("#notice") { click_button "Close" }
@@ -510,7 +398,7 @@ describe "Users" do
         create(:user, username: "manuela", email: "manuelacarmena@example.com")
 
         visit new_user_session_path
-        click_link "Sign in with Google"
+        click_button "Sign in with Google"
 
         expect_to_be_signed_in
       end
@@ -535,7 +423,7 @@ describe "Users" do
         visit "/"
         click_link "Register"
 
-        click_link "Sign up with Wordpress"
+        click_button "Sign up with Wordpress"
 
         expect(page).to have_current_path(new_user_session_path)
         expect(page).to have_content "To continue, please click on the confirmation " \
@@ -546,7 +434,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Wordpress"
+        click_button "Sign in with Wordpress"
         expect_to_be_signed_in
 
         within("#notice") { click_button "Close" }
@@ -564,7 +452,7 @@ describe "Users" do
 
         visit "/"
         click_link "Register"
-        click_link "Sign up with Wordpress"
+        click_button "Sign up with Wordpress"
 
         expect(page).to have_current_path(finish_signup_path)
 
@@ -587,7 +475,7 @@ describe "Users" do
 
         visit "/"
         click_link "Sign in"
-        click_link "Sign in with Wordpress"
+        click_button "Sign in with Wordpress"
 
         expect_to_be_signed_in
 
@@ -600,6 +488,361 @@ describe "Users" do
         expect(page).to have_field "Email", with: "manuela@consul.dev"
       end
     end
+
+    context "Saml" do
+      before { Setting["feature.saml_login"] = true }
+
+      let(:saml_hash_with_email) do
+        {
+          provider: "saml",
+          uid: "ext-tester",
+          info: {
+            name: "samltester",
+            email: "tester@consul.dev"
+          }
+        }
+      end
+
+      let(:saml_hash_with_verified_email) do
+        {
+          provider: "saml",
+          uid: "ext-tester",
+          info: {
+            name: "samltester",
+            email: "tester@consul.dev",
+            verified: "1"
+          }
+        }
+      end
+
+      scenario "Sign up with a confirmed email" do
+        OmniAuth.config.add_mock(:saml, saml_hash_with_verified_email)
+
+        visit new_user_registration_path
+        click_button "Sign up with SAML"
+
+        expect(page).to have_content "Successfully identified as Saml"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "samltester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "Sign up with an unconfirmed email" do
+        OmniAuth.config.add_mock(:saml, saml_hash_with_email)
+
+        visit new_user_registration_path
+        click_button "Sign up with SAML"
+
+        expect(page).to have_content "To continue, please click on the confirmation " \
+                                     "link that we have sent you via email"
+
+        confirm_email
+        expect(page).to have_content "Your account has been confirmed"
+        expect(page).to have_current_path new_user_session_path
+
+        click_button "Sign in with SAML"
+
+        expect(page).to have_content "Successfully identified as Saml"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "samltester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "Sign in with a user with a SAML identity" do
+        user = create(:user, username: "samltester", email: "tester@consul.dev", password: "My123456")
+        create(:identity, uid: "ext-tester", provider: "saml", user: user)
+        OmniAuth.config.add_mock(:saml, { provider: "saml", uid: "ext-tester" })
+
+        visit new_user_session_path
+        click_button "Sign in with SAML"
+
+        expect(page).to have_content "Successfully identified as Saml"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "samltester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "Sign in with a user without a SAML identity keeps the username" do
+        create(:user, username: "tester", email: "tester@consul.dev", password: "My123456")
+        OmniAuth.config.add_mock(:saml, saml_hash_with_verified_email)
+
+        visit new_user_session_path
+        click_button "Sign in with SAML"
+
+        expect(page).to have_content "Successfully identified as Saml"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "tester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "SAML user from one tenant cannot sign in to another tenant", :seed_tenants do
+        %w[mars venus].each do |schema|
+          create(:tenant, schema: schema)
+          Tenant.switch(schema) { Setting["feature.saml_login"] = true }
+        end
+
+        Tenant.switch("mars") do
+          mars_user = create(:user, username: "marsuser", email: "mars@consul.dev")
+          create(:identity, uid: "mars-saml-123", provider: "saml", user: mars_user)
+        end
+
+        mars_saml_hash = {
+          provider: "saml",
+          uid: "mars-saml-123",
+          info: {
+            name: "marsuser",
+            email: "mars@consul.dev"
+          }
+        }
+        OmniAuth.config.add_mock(:saml, mars_saml_hash)
+
+        with_subdomain("mars") do
+          visit new_user_session_path
+          click_button "Sign in with SAML"
+
+          expect(page).to have_content "Successfully identified as Saml"
+
+          within("#notice") { click_button "Close" }
+          click_link "My account"
+
+          expect(page).to have_field "Username", with: "marsuser"
+        end
+
+        with_subdomain("venus") do
+          visit new_user_session_path
+          click_button "Sign in with SAML"
+
+          expect(page).to have_content "To continue, please click on the confirmation " \
+                                       "link that we have sent you via email"
+        end
+      end
+    end
+
+    context "OIDC" do
+      before { Setting["feature.oidc_login"] = true }
+
+      let(:oidc_hash_unverified_email) do
+        {
+          provider: "oidc",
+          uid: "oidc-user-123",
+          info: {
+            name: "oidctester",
+            email: "tester@consul.dev"
+          }
+        }
+      end
+
+      let(:oidc_hash_with_verified_email) do
+        {
+          provider: "oidc",
+          uid: "oidc-user-123",
+          info: {
+            name: "oidctester",
+            email: "tester@consul.dev",
+            verified: "1"
+          }
+        }
+      end
+
+      scenario "Sign up with a confirmed email from OIDC provider" do
+        OmniAuth.config.add_mock(:oidc, oidc_hash_with_verified_email)
+
+        visit new_user_registration_path
+        click_button "Sign up with OIDC"
+
+        expect(page).to have_content "Successfully identified as Oidc"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "oidctester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "Sign up with an unconfirmed email from OIDC provider" do
+        OmniAuth.config.add_mock(:oidc, oidc_hash_unverified_email)
+
+        visit new_user_registration_path
+        click_button "Sign up with OIDC"
+
+        expect(page).to have_content "To continue, please click on the confirmation " \
+                                     "link that we have sent you via email"
+
+        confirm_email
+        expect(page).to have_content "Your account has been confirmed"
+        expect(page).to have_current_path new_user_session_path
+
+        click_button "Sign in with OIDC"
+
+        expect(page).to have_content "Successfully identified as Oidc"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "oidctester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "Sign in with a user with an OIDC identity" do
+        user = create(:user, username: "oidctester", email: "tester@consul.dev", password: "My123456")
+        create(:identity, uid: "oidc-user-123", provider: "oidc", user: user)
+        OmniAuth.config.add_mock(:oidc, { provider: "oidc", uid: "oidc-user-123" })
+
+        visit new_user_session_path
+        click_button "Sign in with OIDC"
+
+        expect(page).to have_content "Successfully identified as Oidc"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "oidctester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "Sign in with a user without an OIDC identity keeps the username" do
+        create(:user, username: "tester", email: "tester@consul.dev", password: "My123456")
+        OmniAuth.config.add_mock(:oidc, oidc_hash_with_verified_email)
+
+        visit new_user_session_path
+        click_button "Sign in with OIDC"
+
+        expect(page).to have_content "Successfully identified as Oidc"
+        expect_to_be_signed_in
+
+        within("#notice") { click_button "Close" }
+        click_link "My account"
+
+        expect(page).to have_field "Username", with: "tester"
+
+        click_link "Change my login details"
+
+        expect(page).to have_field "Email", with: "tester@consul.dev"
+      end
+
+      scenario "OIDC user from one tenant cannot sign in to another tenant", :seed_tenants do
+        %w[mars venus].each do |schema|
+          create(:tenant, schema: schema)
+          Tenant.switch(schema) { Setting["feature.oidc_login"] = true }
+        end
+
+        Tenant.switch("mars") do
+          mars_user = create(:user, username: "marsuser", email: "mars@consul.dev")
+          create(:identity, uid: "mars-oidc-123", provider: "oidc", user: mars_user)
+        end
+
+        mars_oidc_hash = {
+          provider: "oidc",
+          uid: "mars-oidc-123",
+          info: {
+            name: "marsuser",
+            email: "mars@consul.dev"
+          }
+        }
+
+        OmniAuth.config.add_mock(:oidc, mars_oidc_hash)
+
+        with_subdomain("mars") do
+          visit new_user_session_path
+          click_button "Sign in with OIDC"
+
+          expect(page).to have_content "Successfully identified as Oidc"
+
+          within("#notice") { click_button "Close" }
+          click_link "My account"
+
+          expect(page).to have_field "Username", with: "marsuser"
+        end
+
+        with_subdomain("venus") do
+          visit new_user_session_path
+          click_button "Sign in with OIDC"
+
+          expect(page).to have_content "To continue, please click on the confirmation " \
+                                       "link that we have sent you via email"
+        end
+      end
+
+      scenario "Allows user authentication when OIDC token has expired" do
+        user = create(:user, username: "oidctester", email: "tester@consul.dev")
+        create(:identity, uid: "oidc-user-123", provider: "oidc", user: user)
+
+        expired_oidc_hash = oidc_hash_with_verified_email.merge(
+          credentials: {
+            token: "expired_token",
+            expires_at: 1.hour.ago.to_i,
+            expires: true
+          }
+        )
+
+        OmniAuth.config.add_mock(:oidc, expired_oidc_hash)
+
+        visit new_user_session_path
+        click_button "Sign in with OIDC"
+
+        expect(page).to have_content "Successfully identified as Oidc"
+        expect_to_be_signed_in
+      end
+
+      scenario "Handle missing email claim from OIDC provider" do
+        oidc_hash_no_email = {
+          provider: "oidc",
+          uid: "oidc-user-no-email",
+          info: {
+            name: "noemailuser"
+          }
+        }
+
+        OmniAuth.config.add_mock(:oidc, oidc_hash_no_email)
+
+        visit new_user_registration_path
+        click_button "Sign up with OIDC"
+
+        expect(page).to have_content "1 error prevented this Account from being saved."
+
+        expect(page).to have_content "can't be blank"
+      end
+    end
   end
 
   scenario "Sign out" do
@@ -607,7 +850,7 @@ describe "Users" do
     login_as(user)
 
     visit "/"
-    click_link "Sign out"
+    click_button "Sign out"
 
     expect(page).to have_content "You have been signed out successfully."
   end
@@ -702,10 +945,7 @@ describe "Users" do
     user = create(:administrator).user
     user.update!(password_changed_at: 1.year.ago)
 
-    visit new_user_session_path
-    fill_in "Email or username", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Enter"
+    login_through_form_as(user)
 
     expect(page).to have_content "Your password is expired"
 
@@ -741,10 +981,7 @@ describe "Users" do
     user = create(:administrator).user
     user.update!(password_changed_at: 1.year.ago, password: "123456789")
 
-    visit new_user_session_path
-    fill_in "Email or username", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Enter"
+    login_through_form_as(user)
 
     expect(page).to have_content "Your password is expired"
 
@@ -758,9 +995,7 @@ describe "Users" do
 
   context "Regular authentication with password complexity enabled" do
     before do
-      allow(Rails.application).to receive(:secrets).and_return(ActiveSupport::OrderedOptions.new.merge(
-        security: { password_complexity: true }
-      ))
+      stub_secrets(security: { password_complexity: true })
     end
 
     context "Sign up" do

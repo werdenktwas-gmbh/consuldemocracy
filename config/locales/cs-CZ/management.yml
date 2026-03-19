@@ -18,6 +18,7 @@ cs:
           reseted: Heslo bylo úspěšně resetováno
           random: Vytvořit náhodné heslo
           save: Uložit heslo
+          show: Zobrazit heslo
           print: Tisknout heslo
           print_help: Když je heslo uložené, můžete ho vytisknout.
     account_info:
@@ -95,6 +96,8 @@ cs:
         unfeasible: Nerealizovatelná investuce
       print:
         print_button: Tisk
+      search:
+        label: "Hledat investice"
       search_results:
         one: " obsahující výraz %{search_term}'"
         few: " obsahující výraz %{search_term}'"

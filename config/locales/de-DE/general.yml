@@ -565,7 +565,6 @@ de:
         support: "Sie müssen nur auf die Schaltfläche klicken, die unter \"Diesen Vorschlag unterstützen\" angezeigt wird. Sie können sich dort informieren, bevor Sie ihn bewerben. Nur die Vorschläge, die die notwendige Unterstützung erreichen, werden vom Stadtrat ausgeführt. Sie können mir helfen, dies zu erreichen!"
         share: "Sie würden mir einen großen Gefallen tun, wenn Sie meinen Vorschlag mit Ihren Freunden, Familie und Kontakten teilen - das wäre perfekt!"
   polls:
-    all: "Alle"
     dates: "Von %{open_at} bis %{closed_at}"
     final_date: "Endgültige Nachzählungen/Ergebnisse"
     index:
@@ -632,11 +631,7 @@ de:
         success_notice: "Ihre Abstimmung wurde erfolgreich gespeichert."
         rollback_notice: "Während Ihrer Abstimmung ist ein Fehler aufgetreten, bitte versuchen Sie es erneut."
   poll_questions:
-    show:
-      vote_answer: "Für %{answer} abstimmen"
-      voted: "Sie haben für %{answer} abgestimmt"
     description:
-      unique: "Sie können maximal 1 Antwort auswählen."
       multiple: "Sie können maximal %{maximum} Antworten auswählen."
     read_more_about: "Lesen Sie mehr über:"
   proposal_notifications:
@@ -744,7 +739,6 @@ de:
       see_more: Weitere Empfehlungen anzeigen
       hide: Empfehlungen ausblenden
     translations:
-      select_language_prompt: Sprache wählen
       remove_language: Sprache entfernen
       add_language: Sprache hinzufügen
       remote_deepl_translation_info: Texte werden automatisch mit DeepL in alle verfügbaren Sprachen übersetzt

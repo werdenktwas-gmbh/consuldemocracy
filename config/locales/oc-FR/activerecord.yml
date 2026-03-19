@@ -263,7 +263,6 @@ oc:
         public_interests: "Gardatz las etiquetas dels elements que seguissi de publics"
         recommended_debates: "Mòstra de recomandacions de debats"
         recommended_proposals: "Mòstra de recomandacions de proposicions"
-        redeemable_code: "Còdi de verificacion per carta (opcional)"
       direct_message:
         title: "Títol"
         body: "Messatge"
@@ -506,8 +505,6 @@ oc:
           attributes:
             document_number:
               not_in_census: "Aquel documenti pas aparece en lo censo"
-            user_id:
-              has_voted: "Aquel usuario ya a votado"
         legislation/process:
           attributes:
             end_date:

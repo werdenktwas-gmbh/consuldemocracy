@@ -31,6 +31,7 @@ class Proposal < ApplicationRecord
   translates :summary, touch: true
   translates :retired_explanation, touch: true
   include Globalizable
+
   translation_class_delegate :retired_at
 
   belongs_to :author, -> { with_hidden }, class_name: "User", inverse_of: :proposals
@@ -89,7 +90,6 @@ class Proposal < ApplicationRecord
   scope :draft,          -> { excluding(published) }
 
   scope :not_supported_by_user, ->(user) { where.not(id: user.find_voted_items(votable_type: "Proposal")) }
-  scope :created_by,            ->(author) { where(author: author) }
 
   def publish
     update!(published_at: Time.current)
@@ -230,6 +230,12 @@ class Proposal < ApplicationRecord
 
   def users_to_notify
     followers - [author]
+  end
+
+  def notify_users(notification)
+    users_to_notify.each do |user|
+      Notification.add(user, notification)
+    end
   end
 
   def self.proposals_orders(user)

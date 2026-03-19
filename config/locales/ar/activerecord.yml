@@ -416,7 +416,6 @@ ar:
         public_activity: "أترك قائمة الأنشطة الخاصة بي عامة"
         recommended_debates: "إظهار توصيات المناقشات"
         recommended_proposals: "إظهار توصيات المقترحات"
-        redeemable_code: "رمز التحقق الواردة عبر البريد الإلكتروني"
       direct_message:
         title: "عنوان"
         body: "رسالة"
@@ -658,8 +657,6 @@ ar:
           attributes:
             document_number:
               not_in_census: "الوثيقة ليست في التعداد"
-            user_id:
-              has_voted: "هذا المستخدم قد صوت بالفعل"
         legislation/process:
           attributes:
             end_date:

@@ -240,7 +240,6 @@ val:
         public_activity: "Mostrar públicament la meua llista d'activitats"
         recommended_debates: "Mostrar recomanacions de debats"
         recommended_proposals: "Mostrar recomanacions de propostes"
-        redeemable_code: "Codi de verificació per carta"
       direct_message:
         title: "Títol"
         body: "Missatge"
@@ -477,8 +476,6 @@ val:
           attributes:
             document_number:
               not_in_census: "Este document no apareix en el cens"
-            user_id:
-              has_voted: "Este usuari ja ha votat"
         legislation/process:
           attributes:
             end_date:

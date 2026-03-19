@@ -157,6 +157,9 @@ en:
       project/phase:
         one: project phase
         other: projct phases
+      cookies/vendor:
+        one: cookie vendor
+        other: cookie vendors
     attributes:
       budget:
         name: "Name"
@@ -299,7 +302,6 @@ en:
         public_interests: "Keep the elements I follow public"
         recommended_debates: "Recommend debates to me"
         recommended_proposals: "Recommend proposals to me"
-        redeemable_code: "Verification code received via email"
       direct_message:
         title: "Title"
         body: "Message"
@@ -540,6 +542,7 @@ en:
         max_votes: Maximum number of votes
         vote_type: Votation type
       votation_type/vote_type:
+        open: Open-ended
         unique: Unique answer
         multiple: Multiple answers
         essay: Single essay answer
@@ -575,6 +578,10 @@ en:
         title_short: "Short title (used in tabs)"
         content: "Content"
         subtitle: "Subtitle (optional)"
+      cookies/vendor:
+        name: Vendor name
+        cookie: Cookie name
+        script: Javascript code
     errors:
       models:
         user:
@@ -592,7 +599,8 @@ en:
         geozone:
           attributes:
             geojson:
-              invalid: "The GeoJSON provided does not follow the correct format. It must follow the \"Polygon\" or \"MultiPolygon\" type format."
+              invalid: "The GeoJSON provided does not follow the correct format. It must follow the RFC 7946 standard format"
+              invalid_coordinates: "The GeoJSON provided contains invalid coordinates; the coordinates must be in the required \"Longitude, Latitude\" format and follow the RFC 7946 standard format"
         image:
           attributes:
             attachment:
@@ -610,8 +618,6 @@ en:
           attributes:
             document_number:
               not_in_census: "Document not in census"
-            user_id:
-              has_voted: "User has already voted"
         legislation/process:
           attributes:
             end_date:
@@ -664,6 +670,10 @@ en:
           attributes:
             code:
               invalid: "must start with the same code as its target followed by a dot and end with a number"
+        votation_type:
+          attributes:
+            vote_type:
+              cannot_change_to_open_ended: "can't change to open-ended type because you've already defined possible valid answers for this question"
       messages:
         translations_too_short: Is mandatory to provide one translation at least
         record_invalid: "Validation failed: %{errors}"

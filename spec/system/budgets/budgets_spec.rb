@@ -1,9 +1,7 @@
 require "rails_helper"
 
 describe "Budgets" do
-  let(:budget)             { create(:budget) }
-  let(:level_two_user)     { create(:user, :level_two) }
-  let(:allowed_phase_list) { ["balloting", "reviewing_ballots", "finished"] }
+  let(:budget) { create(:budget) }
 
   context "Load" do
     before { budget.update(slug: "budget_slug") }
@@ -45,9 +43,11 @@ describe "Budgets" do
     end
 
     scenario "Show finished budgets list" do
+      budget = create(:budget)
       finished_budget_1 = create(:budget, :finished)
       finished_budget_2 = create(:budget, :finished)
       drafting_budget = create(:budget, :drafting)
+
       visit budgets_path
 
       within("#finished_budgets") do
@@ -305,9 +305,8 @@ describe "Budgets" do
         {
           lat: map_location[:latitude],
           long: map_location[:longitude],
-          investment_title: investment.title,
-          investment_id: investment.id,
-          budget_id: budget.id
+          title: investment.title,
+          link: "/budgets/#{budget.id}/investments/#{investment.id}"
         }
       end
 
@@ -316,7 +315,8 @@ describe "Budgets" do
       visit budgets_path
 
       within ".map-location" do
-        expect(page).to have_css(".map-icon", count: 1, visible: :all)
+        expect(page).to have_css ".map-icon", count: 1, visible: :all
+        expect(page).to have_css ".map-icon[aria-label='#{investment.title}']", visible: :all
       end
     end
 

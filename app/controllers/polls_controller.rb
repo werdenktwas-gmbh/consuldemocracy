@@ -9,7 +9,7 @@ class PollsController < ApplicationController
   load_and_authorize_resource
 
   has_filters %w[current expired]
-  has_orders %w[most_voted newest oldest], only: :show
+  has_orders %w[most_voted newest oldest], only: [:show, :answer]
 
   def index
     @polls = Kaminari.paginate_array(
@@ -23,10 +23,18 @@ class PollsController < ApplicationController
   end
 
   def answer
+    raise CanCan::AccessDenied if @poll.voted_in_booth?(current_user)
+
     @web_vote = Poll::WebVote.new(@poll, current_user)
     begin
       if @web_vote.update(answer_params)
-        redirect_to @poll, notice: t("polls.answers.create.success_notice")
+        if answer_params.blank?
+          redirect_to @poll, notice: t("flash.actions.create.poll_voter_blank")
+        else
+          redirect_to @poll, notice: t("flash.actions.create.poll_voter")
+          #  TODO check translation
+          # redirect_to @poll, notice: t("polls.answers.create.success_notice")
+        end
       else
         @comment_tree = CommentTree.new(@poll, params[:page], @current_order)
         render :show
@@ -54,7 +62,7 @@ class PollsController < ApplicationController
     end
 
     def answer_params
-      params[:web_vote]
+      params[:web_vote] || {}
     end
 
     def allowed_params

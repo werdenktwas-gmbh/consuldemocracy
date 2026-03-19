@@ -30,23 +30,9 @@ describe Poll::Answer do
       expect(answer).not_to be_valid
     end
 
-    it "is not valid if there's already an answer to that question" do
-      author = create(:user)
-      question = create(:poll_question, :yes_no)
-
-      create(:poll_answer, author: author, question: question)
-
-      answer = build(:poll_answer, author: author, question: question)
-
-      expect(answer).not_to be_valid
-    end
-
-    it "is not valid when user already reached multiple answers question max votes" do
-      author = create(:user)
-      question = create(:poll_question_multiple, :abc, max_votes: 2)
-      create(:poll_answer, author: author, question: question, answer: "Answer A")
-      create(:poll_answer, author: author, question: question, answer: "Answer B")
-      answer = build(:poll_answer, author: author, question: question, answer: "Answer C")
+    it "is not valid without an answer when question is open-ended" do
+      answer.question = create(:poll_question_open)
+      answer.answer = nil
 
       expect(answer).not_to be_valid
     end
@@ -89,17 +75,18 @@ describe Poll::Answer do
       expect { answer.save }.not_to raise_error
     end
 
-    it "is valid for answers included in the Poll::Question's question_options list" do
+    it "is valid for answers included in the list of titles for the option" do
       question = create(:poll_question)
-      create(:poll_question_option, title: "One", question: question)
+      option = create(:poll_question_option, title_en: "One", title_es: "Uno", question: question)
+
       create(:poll_question_option, title: "Two", question: question)
-      create(:poll_question_option, title: "Three", question: question)
+      create(:poll_question_option, title: "Three", question: create(:poll_question, poll: create(:poll)))
 
-      expect(build(:poll_answer, question: question, answer: "One")).to be_valid
-      expect(build(:poll_answer, question: question, answer: "Two")).to be_valid
-      expect(build(:poll_answer, question: question, answer: "Three")).to be_valid
-
-      expect(build(:poll_answer, question: question, answer: "Four")).not_to be_valid
+      expect(build(:poll_answer, option: option, answer: "One")).to be_valid
+      expect(build(:poll_answer, option: option, answer: "Uno")).to be_valid
+      expect(build(:poll_answer, option: option, answer: "Two")).not_to be_valid
+      expect(build(:poll_answer, option: option, answer: "Three")).not_to be_valid
+      expect(build(:poll_answer, option: option, answer: "Any")).not_to be_valid
     end
 
     context "creating answers at the same time", :race_condition do

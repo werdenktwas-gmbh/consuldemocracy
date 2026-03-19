@@ -2,23 +2,18 @@
   "use strict";
   App.AdminVotationTypesFields = {
     adjustForm: function() {
-      if ($(this).val() === "multiple") {
+      var select_field = $(this);
+
+      $("[data-vote-type]").hide(0, function() {
+        $("[data-vote-type=" + select_field.val() + "]").show();
+      });
+
+      if (select_field.val() === "multiple") {
         $(".max-votes").show();
-        $(".description-unique").hide();
-          $(".description-essay").hide();
-        $(".description-multiple").show();
         $(".votation-type-max-votes").prop("disabled", false);
       } else {
         $(".max-votes").hide();
-        $(".description-multiple").hide();
         $(".votation-type-max-votes").prop("disabled", true);
-        if ($(this).val() === "unique") {
-          $(".description-unique").show();
-          $(".description-essay").hide();
-        } else {
-          $(".description-unique").hide();
-          $(".description-essay").show();
-        }
       }
     },
     initialize: function() {

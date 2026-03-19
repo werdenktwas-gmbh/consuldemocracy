@@ -570,7 +570,6 @@ hr:
         support: "Vi samo trebate kliknuti na gumb koji ćete vidjeti u nastavku 'Podržite ovaj prijedlog' i dobiti povratne informacije prije nego ga promovirate. Samo će prijedlozi za postizanje maksimalne potpore biti izvršeni od strane javnog tijela, a uz vašu pomoć možemo ostvariti prijedlog!"
         share: "Bilo bi super da mi učinite uslugu dijeljenja mojeg prijedloga sa svojim prijateljima, obitelji i kontaktima, bilo bi savršeno!"
   polls:
-    all: "Svi"
     dates: "Od %{open_at} do %{closed_at}"
     final_date: "Konačno prebrojavanje/Rezultati"
     index:
@@ -629,10 +628,6 @@ hr:
         most_voted_answer: "Najviše izglasan odgovor: "
     poll_header:
       back_to_proposal: Nazad na prijedlog
-  poll_questions:
-    show:
-      vote_answer: "Glas %{answer}"
-      voted: "Vi ste glasali %{answer}"
   proposal_notifications:
     new:
       title: "Pošalji poruku"
@@ -737,7 +732,6 @@ hr:
       see_more: Vidi više preporuka
       hide: Sakrij preporuke
     translations:
-      select_language_prompt: Odaberite jezik
       remove_language: Uklonite jezik
       add_language: Dodajte jezik
       languages_in_use:

@@ -17,6 +17,8 @@ en:
       edit: Edit
       configure: Configure
       public: View
+      select: Select
+      show_to_valuators: "Show %{name} to valuators"
     officing_booth:
       title: "You are officing the booth located at %{booth}. If this is not correct, do not continue and call the help phone number. Thank you."
     banners:
@@ -61,6 +63,7 @@ en:
         filter: Show
         filters:
           all: All
+          on_budget_investments: Investment projects
           on_comments: Comments
           on_debates: Debates
           on_proposals: Proposals
@@ -211,7 +214,6 @@ en:
         submit: "Save heading"
       group_switcher:
         currently_showing: "Showing headings from the <strong>%{group}</strong> group."
-        different_group: "Manage headings from a different group"
         the_other_group: "Manage headings from the %{group} group."
       index:
         back: "Go back to groups"
@@ -234,12 +236,14 @@ en:
         title: "%{budget} phases"
     budget_investments:
       index:
+        basic_filters:
+          valuator_or_group: Valuator or group
+          title_or_id: Title or ID
         heading_filter_all: All headings
         administrator_filter_all: All administrators
         valuator_filter_all: All valuators
         tags_filter_all: All tags
         advanced_filters: Advanced filters
-        placeholder: Search projects
         filters:
           all: All
           without_admin: Without assigned admin
@@ -269,7 +273,6 @@ en:
           unfeasible: "Unfeasible"
           undecided: "Undecided"
         selected: "Selected"
-        select: "Select"
         list:
           id: ID
           title: Title
@@ -1133,23 +1136,16 @@ en:
         title: "Votation type"
         unique_description: "It's only possible to answer one time to the question."
         multiple_description: "Allows to choose multiple answers. It's possible to set the maximum number of answers."
-        essay_description: "Open ended question that allows the user to provide a single answer in their own words."
+        open_description: "Open-ended question that allows users to provide a single answer in their own words."
       preliminary_results:
         title: "Preliminary Results"
     questions:
       index:
-        title: "Questions"
         create: "Create question"
-        no_questions: "There are no questions."
-        filter_poll: Filter by Poll
         select_poll: Select Poll
-        questions_tab: "Questions"
         successful_proposals_tab: "Successful proposals"
         create_question: "Create question"
         table_proposal: "Proposal"
-        table_question: "Question"
-        table_poll: "Poll"
-        poll_not_assigned: "Poll not assigned"
       edit:
         title: "Edit Question"
       form:
@@ -1170,7 +1166,6 @@ en:
         edit_question: Edit question
         valid_answers: Valid answers
         add_answer: Add answer
-        video_url: External video
         answers:
           title: Answer
           description: Description
@@ -1304,7 +1299,6 @@ en:
         title: Proposals
         id: ID
         author: Author
-        select: Select
         selected: Selected
         milestones: Milestones
         no_proposals: There are no proposals.
@@ -1360,6 +1354,10 @@ en:
         sdg:
           title: SDG configuration
           how_to_enable: 'To show the configuration options from Sustainable Development Goals you must enable "SDG" on "Features" tab.'
+        cookies_consent:
+          title: Cookies consent
+        cookies_consent_banner:
+          title: Cookies consent banner
       remote_census_general_name: General Information
       remote_census_request_name: Request Data
       remote_census_response_name: Response Data
@@ -1625,6 +1623,7 @@ en:
             subnavigation_right: Main Navigation Right
       images:
         index:
+          dimensions: "(%{width}x%{height})"
           title: Custom images
           update: Update
           image: Image
@@ -1862,3 +1861,27 @@ en:
           notice: "Successfully created project phase."
         errors:
           dates_range_invalid: "Start date needs to me earlier than end date."
+    cookies:
+      vendors:
+        empty: No vendors found
+        third_party_cookies: Third party cookies
+        create_button: Create cookie vendor
+        create:
+          notice: Cookie vendor created successfully
+        new:
+          title: New cookie vendor
+        edit:
+          title: Edit cookie vendor
+        update:
+          notice: Cookie vendor updated successfully
+        destroy:
+          notice: Cookie vendor deleted successfully
+        form:
+          name:
+            help_text: This information will be publicly visible.
+          cookie:
+            help_text: This information will be used internally. The cookie name must be unique, and it can only contain letters, digits and underscores.
+          description:
+            help_text: This information will be publicly visible.
+          script:
+            help_text: This is the script to run when this cookie is accepted by the user. You can enter vanilla Javascript code here and introduce references to other application javascript.

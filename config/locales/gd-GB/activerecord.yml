@@ -380,7 +380,6 @@ gd:
         public_interests: "Cùm na h-eileamaidean a tha mi a’ leantainn poblach"
         recommended_debates: "Deasbadan a chaidh moladh dhomh"
         recommended_proposals: "Molaidhean a chaidh moladh dhomh"
-        redeemable_code: "An còd dearbhaidh a fhuaras tro phost-d."
       direct_message:
         title: "Tiotal"
         body: "Teachdaireachd"
@@ -642,8 +641,6 @@ gd:
           attributes:
             document_number:
               not_in_census: "Chan eil an sgrìobhainn sa chunntas-sluaigh"
-            user_id:
-              has_voted: "Tha an cleachdaiche air bhòtadh mar-thà"
         legislation/process:
           attributes:
             end_date:

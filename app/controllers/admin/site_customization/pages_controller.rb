@@ -1,9 +1,10 @@
 class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::BaseController
   include Translatable
+
   load_and_authorize_resource :page, class: "SiteCustomization::Page"
 
   def index
-    @pages = SiteCustomization::Page.order("slug").page(params[:page])
+    @pages = SiteCustomization::Page.order(:slug).page(params[:page])
   end
 
   def create
@@ -42,9 +43,5 @@ class Admin::SiteCustomization::PagesController < Admin::SiteCustomization::Base
       attributes = [:slug, :more_info_flag, :print_content_flag, :status]
 
       [*attributes, translation_params(SiteCustomization::Page)]
-    end
-
-    def resource
-      SiteCustomization::Page.find(params[:id])
     end
 end

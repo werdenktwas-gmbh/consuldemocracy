@@ -1,10 +1,10 @@
 .document {
   + .document {
-    margin-top: calc(#{$line-height} / 3);
+    margin-top: calc($line-height / 3);
   }
 
-  a:first-of-type {
-    word-wrap: break-word;
+  a {
+    overflow-wrap: break-word;
 
     .document-metadata {
       &::before,
@@ -17,5 +17,9 @@
         @include vertical-separator;
       }
     }
+  }
+
+  button {
+    cursor: pointer;
   }
 }

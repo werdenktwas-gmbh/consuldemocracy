@@ -2,13 +2,16 @@ require "rails_helper"
 
 describe "Proposal Notifications" do
   scenario "Send a notification" do
-    author = create(:user, :with_proposal)
+    author = create(:user)
+    proposal = create(:proposal, author: author)
 
     login_as(author)
     visit root_path
 
     click_link "My content"
-    click_link "Dashboard"
+    within("#proposal_#{proposal.id}") do
+      click_link "Dashboard"
+    end
 
     within("#side_menu") do
       click_link "Message to users"
@@ -142,26 +145,6 @@ describe "Proposal Notifications" do
   end
 
   context "Permissions" do
-    scenario "Link to send the message" do
-      author = create(:user)
-      proposal = create(:proposal, author: author)
-
-      login_as(author)
-      visit root_path
-
-      click_link "My content"
-
-      within("#proposal_#{proposal.id}") do
-        click_link "Dashboard"
-      end
-
-      within("#side_menu") do
-        click_link "Message to users"
-      end
-
-      expect(page).to have_link "Send notification to proposal followers"
-    end
-
     scenario "Accessing form directly" do
       user = create(:user)
       author = create(:user)
@@ -185,7 +168,6 @@ describe "Proposal Notifications" do
       user3 = create(:user, votables: [proposal])
 
       login_as(author)
-      visit root_path
 
       visit new_proposal_notification_path(proposal_id: proposal.id)
 
@@ -281,26 +263,14 @@ describe "Proposal Notifications" do
       expect(page).to have_css ".notification", count: 0
     end
 
-    scenario "Proposal hidden" do
+    scenario "Hidden proposal" do
       author = create(:user)
       user = create(:user)
       proposal = create(:proposal, author: author, voters: [user], followers: [user])
-
-      login_as(author)
-      visit root_path
-
-      visit new_proposal_notification_path(proposal_id: proposal.id)
-
-      fill_in "proposal_notification_title", with: "Thank you for supporting my proposal"
-      fill_in "proposal_notification_body", with: "Please share it with " \
-                                                  "others so we can make it happen!"
-      click_button "Send notification"
-
-      expect(page).to have_content "Your message has been sent correctly."
-
+      notification = create(:proposal_notification, author: author, proposal: proposal)
+      proposal.notify_users(notification)
       proposal.hide
 
-      logout
       login_as user
       visit root_path
 

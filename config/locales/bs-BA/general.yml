@@ -535,7 +535,6 @@ bs:
         support: "Samo trebate kliknuti dugme koje vidite dole, \"Podrži ovaj prijedlog\", i možete se informisati prije nego se odlučite promovisati prijedlog. Gradsko vijeće će realizovati samo prijedloge koji dobiju maksimalnu podršku, tako da sam siguran da ćete mi pomoći da to i postignemo!"
         share: "Bilo bi super kad bi mi učinili veliku uslugu i podijelili moj prijedlog sa prijateljima, porodicom i poznanicima!"
   polls:
-    all: "Sve"
     dates: "Od %{open_at} do %{closed_at}"
     final_date: "Konačno ponovno brojanje/Rezultati"
     index:
@@ -594,10 +593,6 @@ bs:
         most_voted_answer: "Odgovor sa najviše glasova: "
     poll_header:
       back_to_proposal: Nazad na prijedlog
-  poll_questions:
-    show:
-      vote_answer: "Glasaj za (odgovor) %{answer}"
-      voted: "Glasali ste za (odgovor) %{answer}"
   proposal_notifications:
     new:
       title: "Pošalji poruku"

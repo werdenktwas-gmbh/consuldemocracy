@@ -64,8 +64,9 @@ describe "Poll question options", :admin do
     expect(page).to have_content "Changes saved"
     expect(page).to have_content "New title"
 
-    visit admin_question_path(question)
+    refresh
 
+    expect(page).not_to have_content "Changes saved"
     expect(page).not_to have_content "Answer title"
 
     expect("Another title").to appear_before("New title")
@@ -93,7 +94,7 @@ describe "Poll question options", :admin do
 
     visit admin_question_path(question)
 
-    within("tbody.sortable") do
+    within(".poll-question-options-table tbody") do
       expect("First").to appear_before("Last")
 
       find("tr", text: "Last").drag_to(find("tr", text: "First"))

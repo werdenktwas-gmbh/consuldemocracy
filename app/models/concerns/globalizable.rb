@@ -1,4 +1,4 @@
-require "deep_l_translation_service"
+# require "../../services/deep_l_translation_service"
 module Globalizable
   MIN_TRANSLATIONS = 1
   extend ActiveSupport::Concern
@@ -96,7 +96,7 @@ module Globalizable
                     length: options[:length],
                     if: lambda { |translation| translation.locale == Setting.default_locale }
         end
-        if options.count > 1
+        if options.many?
           translation_class.instance_eval do
             validates method, options.reject { |key| key == :length }
           end

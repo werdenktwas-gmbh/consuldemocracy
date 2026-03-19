@@ -598,7 +598,6 @@ gd:
         support: "Chan eil agad ri dhèanamh ach briogadh air a’ phutan a chì thu gu h-ìosal ‘Cuir taic ris a’ mholadh seo’ agus gheibh thu cothrom ionnsachadh mu dheidhinn mus cuir thu air adhart e. Is e dìreach na molaidhean a gheibh an taic as motha a thèid a chur an gnìomh le Comhairle a’ Bhaile, agus bha mi a’ smaoineachadh gun cuidicheadh tu mi gus seo a choileanadh!"
         share: "Agus ma nì thu fàbhar mòr dhomh cuideachd is ma sgaoileas tu mo mholadh ri do charaidean, do theaghlach agus na daoine as aithne dhut, bhiodh e sgoinneil!"
   polls:
-    all: "A h-uile"
     dates: "Bho %{open_at} gu %{closed_at}"
     final_date: "Cunntasan /Toraidhean deireannach"
     index:
@@ -658,11 +657,7 @@ gd:
     poll_header:
       back_to_proposal: Air ais dhan mholadh
   poll_questions:
-    show:
-      vote_answer: "Bhòt %{answer}"
-      voted: "Tha thu air bhòtadh %{answer}"
     description:
-      unique: "Faodaidh tu suas ri 1 freagairt a thaghadh."
       multiple: "Faodaidh tu suas ri %{maximum} freagairtean a thaghadh."
     read_more_about: "Leugh barrachd mu dhèidhinn:"
   proposal_notifications:
@@ -776,7 +771,6 @@ gd:
       see_more: Faic barrachd mholaidhean
       hide: Falaich molaidhean
     translations:
-      select_language_prompt: Tagh cànan
       remove_language: Thoir cànan air falbh
       add_language: Cuir cànan ris
       languages_in_use:

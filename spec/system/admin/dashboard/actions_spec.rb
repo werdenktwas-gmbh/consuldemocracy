@@ -1,15 +1,6 @@
 require "rails_helper"
 
 describe "Admin dashboard actions", :admin do
-  it_behaves_like "nested documentable",
-                  "administrator",
-                  "dashboard_action",
-                  "new_admin_dashboard_action_path",
-                  {},
-                  "documentable_fill_new_valid_dashboard_action",
-                  "Save",
-                  "Action created successfully"
-
   context "when visiting index" do
     context "and no actions defined" do
       before do
@@ -73,14 +64,24 @@ describe "Admin dashboard actions", :admin do
     end
 
     scenario "Updates the action" do
-      fill_in "dashboard_action_title", with: "Great action!"
+      expect(page).to have_checked_field "Proposed action"
+      expect(page).to have_unchecked_field "Resource"
+      expect(page).not_to have_field "Short description"
+      expect(page).not_to have_field "Include in the resource a button to " \
+                                     "request the resource from administrators"
+
+      choose "Resource"
+      check "Include in the resource a button to request the resource from administrators"
+
+      fill_in "Title", with: "Great action!"
+      fill_in "Short description", with: "And awesome too!"
       click_button "Save"
 
       expect(page).to have_content "Great action!"
     end
 
     scenario "Renders edit form in case data is invalid" do
-      fill_in "dashboard_action_title", with: "x"
+      fill_in "Title", with: "x"
       click_button "Save"
       expect(page).to have_content("error prevented this Dashboard/Action from being saved.")
     end
@@ -89,11 +90,9 @@ describe "Admin dashboard actions", :admin do
   context "when destroying an action" do
     let!(:action) { create(:dashboard_action) }
 
-    before do
-      visit admin_dashboard_actions_path
-    end
-
     scenario "deletes the action" do
+      visit admin_dashboard_actions_path
+
       accept_confirm("Are you sure? This action will delete \"#{action.title}\" and can't be undone.") do
         click_button "Delete"
       end
@@ -101,8 +100,10 @@ describe "Admin dashboard actions", :admin do
       expect(page).not_to have_content(action.title)
     end
 
-    scenario "can not delete actions that have been executed" do
-      _executed_action = create(:dashboard_executed_action, action: action)
+    scenario "cannot delete actions that have been executed" do
+      create(:dashboard_executed_action, action: action)
+
+      visit admin_dashboard_actions_path
 
       accept_confirm("Are you sure? This action will delete \"#{action.title}\" and can't be undone.") do
         click_button "Delete"

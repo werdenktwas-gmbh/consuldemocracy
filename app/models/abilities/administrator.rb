@@ -71,10 +71,13 @@ module Abilities
 
       can [:read, :create, :update, :destroy], Budget::Group
       can [:read, :create, :update, :destroy], Budget::Heading
-      can [:hide, :admin_update, :toggle_selection], Budget::Investment
+      can [:hide, :admin_update], Budget::Investment
       can [:valuate, :comment_valuation], Budget::Investment
-      cannot [:admin_update, :toggle_selection, :valuate, :comment_valuation],
+      cannot [:admin_update, :valuate, :comment_valuation],
              Budget::Investment, budget: { phase: "finished" }
+      can [:select, :deselect], Budget::Investment do |investment|
+        investment.feasible? && investment.valuation_finished? && !investment.budget.finished?
+      end
 
       can :create, Budget::ValuatorAssignment
 
@@ -98,7 +101,7 @@ module Abilities
       end
       can [:read, :order_options], Poll::Question::Option
       can [:create, :update, :destroy], Poll::Question::Option do |option|
-        can?(:update, option.question)
+        can?(:update, option.question) && option.question.accepts_options?
       end
       can :read, Poll::Question::Option::Video
       can [:create, :update, :destroy], Poll::Question::Option::Video do |video|
@@ -138,6 +141,8 @@ module Abilities
 
       can :manage, LocalCensusRecord
       can [:create, :read], LocalCensusRecords::Import
+
+      can :manage, Cookies::Vendor
 
       if Rails.application.config.multitenancy && Tenant.default?
         can [:create, :read, :update, :hide, :restore], Tenant

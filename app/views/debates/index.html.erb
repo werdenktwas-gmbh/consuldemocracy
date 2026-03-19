@@ -18,11 +18,7 @@
   <%= render "shared/section_header", i18n_namespace: "debates.index.section_header", image: "debates" %>
 <% end %>
 
-<% if feature?("user.recommendations") && @recommended_debates.present? %>
-  <%= render "shared/recommended_index", recommended: @recommended_debates,
-                                         disable_recommendations_path: recommendations_disable_debates_path,
-                                         namespace: "debates" %>
-<% end %>
+<%= render Shared::RecommendedIndexComponent.new(@recommended_debates, namespace: "debates") %>
 
 <div class="row">
   <div id="debates" class="debates-list small-12 medium-9 column">
@@ -69,7 +65,6 @@
         <p><%= t("debates.index.section_footer.help_text_1") %></p>
         <p><%= sanitize(t("debates.index.section_footer.help_text_2",
                           org: link_to(setting["org_name"], new_user_registration_path))) %></p>
-        </p>
       </div>
     <% end %>
   </div>

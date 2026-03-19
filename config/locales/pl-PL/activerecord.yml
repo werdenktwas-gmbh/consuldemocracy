@@ -320,7 +320,6 @@ pl:
         public_activity: "Pokazuj publicznie moją listę aktywności"
         recommended_debates: "Pokaż zalecenia debat"
         recommended_proposals: "Pokaż wnioski rekomendacji"
-        redeemable_code: "Kod weryfikacyjny otrzymany za pośrednictwem poczty e-mail"
       direct_message:
         title: "Tytuł"
         body: "Wiadomość"
@@ -553,8 +552,6 @@ pl:
           attributes:
             document_number:
               not_in_census: "Brak dokumentu w spisie"
-            user_id:
-              has_voted: "Użytkownik już zagłosował"
         legislation/process:
           attributes:
             end_date:

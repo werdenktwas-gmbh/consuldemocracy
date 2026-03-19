@@ -1,5 +1,14 @@
-<%= form_for poll, url: answer_poll_path(poll), method: :post, class: "poll-form" do |f| %>
-  <%= render Polls::Questions::QuestionComponent.with_collection(questions) %>
+TODO
+<%#= form_for poll, url: answer_poll_path(poll), method: :post, class: "poll-form" do |f| %>
+  <%#= render Polls::Questions::QuestionComponent.with_collection(questions) %>
 
-  <%= f.submit(class: "button", value: t("polls.show.send_vote")) %><%# TODO: I18n %>
+  <%#= f.submit(class: "button", value: t("polls.show.send_vote"), disabled: disabled?) %>
+
+
+<%= form_for web_vote, form_attributes do |f| %>
+  <% questions.each do |question| %>
+    <%= render Polls::Questions::QuestionComponent.new(question, form: f, disabled: disabled?) %>
+  <% end %>
+
+  <%= f.submit(class: "button", value: t("polls.form.vote"), disabled: disabled?) %>
 <% end %>

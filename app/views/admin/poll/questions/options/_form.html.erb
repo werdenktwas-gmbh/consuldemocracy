@@ -10,7 +10,7 @@
   <div class="row">
     <%= f.translatable_fields do |translations_form| %>
       <div class="column end">
-        <% if @option.question.essay? %>
+        <% if !@option.question.accepts_options? %>
           <%= f.hidden_field :title, value: 'open text' %>
         <% else %>
           <%= translations_form.text_field :title %>
@@ -21,7 +21,7 @@
       </div>
     <% end %>
     <div class="column">
-      <% if @option.question.essay? %>
+      <% if !@option.question.accepts_options? %>
         <%= f.hidden_field :open_text, value: true %>
       <% else %>
         <%= f.check_box :open_text, checked: @option.open_text? %>

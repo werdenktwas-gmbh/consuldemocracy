@@ -1,7 +1,7 @@
 <h2><%= question.title %></h2>
 <% question.options_with_read_more.each do |option| %>
   <div class="small-12 medium-6 column end option <%= cycle("first", "") %>" id="option_<%= option.id %>">
-    <% if !question.essay? %>
+    <% if question.accepts_options? %>
       <h3><%= option.title %></h3>
     <% end %>
 
@@ -14,13 +14,13 @@
           <button type="button" id="read_more_<%= option.id %>"
               data-toggle="option_description_<%= option.id %> read_more_<%= option.id %> read_less_<%= option.id %>"
               data-toggler="hide">
-            <%= t("polls.show.read_more", answer: question.essay? ? question.title : option.title) %>
+            <%= t("polls.show.read_more", answer: !question.accepts_options? ? question.title : option.title) %>
           </button>
           <button type="button" id="read_less_<%= option.id %>"
               data-toggle="option_description_<%= option.id %> read_more_<%= option.id %> read_less_<%= option.id %>"
               data-toggler="hide"
               class="hide">
-            <%= t("polls.show.read_less", answer: question.essay? ? question.title : option.title) %>
+            <%= t("polls.show.read_less", answer: !question.accepts_options? ? question.title : option.title) %>
           </button>
         </div>
       <% end %>
@@ -49,9 +49,7 @@
           </p>
 
           <% option.videos.each do |video| %>
-              <%= link_to video.title,
-                          video.url,
-                          rel: "nofollow" %><br>
+            <%= link_to video.title, video.url, rel: "nofollow" %><br>
           <% end %>
         </div>
       <% end %>

@@ -187,7 +187,6 @@ sl:
         official_position_badge: "Pokaži značko z uradnim položajem"
         phone_number: "Telefonska številka"
         public_activity: "Moj seznam aktivnosti naj bo javen"
-        redeemable_code: "Koda za preverjanje, poslana po e-pošti"
       direct_message:
         title: "Naslov"
         body: "Sporočilo"
@@ -388,8 +387,6 @@ sl:
           attributes:
             document_number:
               not_in_census: "Dokumenta ni v popisu"
-            user_id:
-              has_voted: "Uporabnik je že glasoval"
         legislation/process:
           attributes:
             end_date:

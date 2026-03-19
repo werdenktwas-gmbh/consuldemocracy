@@ -349,7 +349,6 @@ uk-UA:
         public_interests: "Забезпечити вільний доступ до міток елементів, за якими я слідкую"
         recommended_debates: "Показувати рекомендовані обговорення"
         recommended_proposals: "Показувати рекомендовані пропозиції"
-        redeemable_code: "Код підтвердження надіслано на електронну адресу"
       direct_message:
         title: "Назва"
         body: "Повідомлення"
@@ -592,8 +591,6 @@ uk-UA:
           attributes:
             document_number:
               not_in_census: "Документ відсутній у переписі"
-            user_id:
-              has_voted: "Користувач вже проголосував"
         legislation/process:
           attributes:
             end_date:

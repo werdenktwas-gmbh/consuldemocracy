@@ -91,6 +91,10 @@ es:
       google_login_description: "Permitir que los usuarios se registren con su cuenta de Google"
       wordpress_login: "Registro con Wordpress"
       wordpress_login_description: "Permitir que los usuarios se registren con su cuenta de Wordpress"
+      oidc_login: "Registro con OpenID Connect"
+      oidc_login_description: "Permitir que los usuarios se registren usando OpenID Connect (OIDC)"
+      saml_login: "Registro con SAML"
+      saml_login_description: "Permitir que los usuarios se registren usando SAML"
       featured_proposals: "Propuestas destacadas"
       featured_proposals_description: "Muestra propuestas destacadas en la página principal de propuestas"
       signature_sheets: "Hojas de firmas"
@@ -134,6 +138,11 @@ es:
       remove_investments_supports_description: "Permite que los usuarios retiren su apoyo en los proyectos de gasto de los presupuestos participativos durante la fase de apoyos."
       sdg: ODS
       sdg_description: Habilitar secciones relacionadas con Objetivos de Desarrollo Sostenible en el menú de administración y en la sección de Configuración Global.
+      cookies_consent: Banner de consentimiento de cookies
+      cookies_consent_description: Activa el banner de consentimiento de cookies para informar a los usuarios sobre las cookies que utiliza la aplicación.
+      gdpr:
+        require_consent_for_notifications: Consentimiento explícito para notificaciones
+        require_consent_for_notifications_description: Requerir que los usuarios tengan que dar consentimiento explícito para enviarles boletines e información similar tal y como describe Reglamento General de Protección de Datos (RGPD).
     remote_census:
       general:
         endpoint: "Endpoint"
@@ -226,3 +235,8 @@ es:
         budgets_description: Permitir alineamiento de los Objetivos de Desarrollo Sostenible en presupuestos participativos
         legislation: Alineamiento ODS en legislación colaborativa
         legislation_description: Permitir alineamiento de los Objetivos de Desarrollo Sostenible en legislación colaborativa
+    cookies_consent:
+      more_info_link: Enlace a la política de cookies
+      more_info_link_description: Enlace que se muestra en el banner de consentimiento a la página de política de cookies
+      version_name: Nombre de la versión
+      version_name_description: Cambia el nombre de la versión para obligar a todos los usuarios a realizar el proceso de consentimiento de cookies de nuevo. Esto puede ser particularmente útil cuando se introducen cambios drásticos en la política de cookies que requieren de un nuevo consentimiento explícito por parte de los usuarios.

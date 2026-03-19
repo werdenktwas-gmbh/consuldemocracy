@@ -5,6 +5,10 @@ class Layout::NotificationItemComponent < ApplicationComponent
     @user = user
   end
 
+  def render?
+    user.present? && !Rails.application.multitenancy_management_mode?
+  end
+
   private
 
     def text
@@ -12,7 +16,7 @@ class Layout::NotificationItemComponent < ApplicationComponent
     end
 
     def notifications_class
-      if unread_notifications.count > 0
+      if unread_notifications.any?
         "unread-notifications"
       else
         "no-notifications"

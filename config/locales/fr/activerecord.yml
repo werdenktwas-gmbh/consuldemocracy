@@ -293,7 +293,6 @@ fr:
         public_interests: "Rendre publiques les étiquettes des éléments que je suis"
         recommended_debates: "Voir les recommandations des débats"
         recommended_proposals: "Voir les recommandations des propositions"
-        redeemable_code: "Vérification du code reçu par courriel"
       direct_message:
         title: "Titre"
         body: "Message"
@@ -569,8 +568,6 @@ fr:
           attributes:
             document_number:
               not_in_census: "Ce document n'est pas dans le recensement"
-            user_id:
-              has_voted: "L'utilisateur a déjà voté"
         legislation/process:
           attributes:
             end_date:

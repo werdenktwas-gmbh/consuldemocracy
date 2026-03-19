@@ -280,7 +280,6 @@ el:
         public_interests: "Κρατήστε τις ετικέτες των στοιχείων που ακολουθώ δημόσια"
         recommended_debates: "Εμφάνιση προτάσεων για δημόσιες συζητήσεις"
         recommended_proposals: "Εμφάνιση συστάσεων για προτάσεις"
-        redeemable_code: "Κωδικός επαλήθευσης που λάβατε μέσω email"
       direct_message:
         title: "Τίτλος"
         body: "Μήνυμα"
@@ -531,8 +530,6 @@ el:
           attributes:
             document_number:
               not_in_census: "Έγγραφο το οποίο δεν υπάρχει στην απογραφή"
-            user_id:
-              has_voted: "Ο χρήστης έχει ήδη ψηφίσει"
         legislation/process:
           attributes:
             end_date:
@@ -540,7 +537,7 @@ el:
             debate_end_date:
               invalid_date_range: πρέπει να είναι κατά ή μετά την ενδεικτική ημερομηνία έναρξης
             draft_end_date:
-              invalid_date_range: πρέπει να είναι κατά ή μετά την ενδεικτική ημερομηνία έναρξης
+              invalid_date_range: πρέπει να είναι κατά ή μετά την ενδεικτική ημερομηνία έναρξης 
             allegations_end_date:
               invalid_date_range: πρέπει να είναι κατά ή μετά την ημερομηνία έναρξης των σχολίων
         local_census_record:

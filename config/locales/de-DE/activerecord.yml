@@ -291,7 +291,6 @@ de:
         public_interests: "Die Bezeichnungen der Elemente denen ich folge öffentlich zugänglich halten"
         recommended_debates: "Debatten-Empfehlungen anzeigen"
         recommended_proposals: "Antrags-Empfehlungen anzeigen"
-        redeemable_code: "Bestätigungscode per Post (optional)"
       direct_message:
         title: "Titel"
         body: "Nachricht"
@@ -529,6 +528,7 @@ de:
         unique: "Eindeutige Antwort\n"
         multiple: Mehrere Antworten
         essay: Freitext-Antwort
+        open: Freitext-Antwort
       project:
         title: "Titel"
         slug: "Url-Pfad"
@@ -592,8 +592,6 @@ de:
           attributes:
             document_number:
               not_in_census: "Dieses Dokument scheint nicht im Melderegister auf"
-            user_id:
-              has_voted: "Nutzer hat bereit abgestimmt"
         legislation/process:
           attributes:
             end_date:

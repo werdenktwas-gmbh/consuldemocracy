@@ -18,7 +18,7 @@ describe Layout::AdminHeaderComponent do
       expect(page).to have_link "You don't have new notifications"
       expect(page).to have_link "My content"
       expect(page).to have_link "My account"
-      expect(page).to have_link "Sign out"
+      expect(page).to have_button "Sign out"
       expect(page).to have_css "[data-toggle]"
     end
 
@@ -34,5 +34,14 @@ describe Layout::AdminHeaderComponent do
       expect(page).not_to have_content "Sign out"
       expect(page).not_to have_css "[data-toggle]"
     end
+  end
+
+  it "does not show link to root path when multitenancy_management_mode is enabled" do
+    allow(Rails.application.config).to receive(:multitenancy_management_mode).and_return(true)
+    create(:administrator, user: user)
+
+    render_inline Layout::AdminHeaderComponent.new(user)
+
+    expect(page).not_to have_link "Go back to CONSUL"
   end
 end

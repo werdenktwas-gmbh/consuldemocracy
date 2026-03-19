@@ -44,7 +44,7 @@
   * [Tests](customization/tests.md)
 
 * [Funcionalidades Técnicas](features/features.md)
-  * [OAuth](features/oauth.md)
+  * [Autenticación con servicios externos (OAuth)](features/oauth.md)
   * [GraphQL](features/graphql.md)
   * [Recomendaciones de debates y propuestas](features/recommendations.md)
   * [Configurar conexión con el Censo](features/census_configuration.md)
@@ -55,4 +55,6 @@
 * [Proyecto Open Source](open_source/open_source.md)
   * [Código de conducta](open_source/code_of_conduct.md)
   * [Contribuciones](open_source/contributing.md)
+  * [Convenciones de código](open_source/coding_conventions.md)
+  * [Open source forks y modificaciones](open_source/open-source-forks-y-modificaciones.md)
   * [Licencia](open_source/license.md)

@@ -211,7 +211,6 @@ id:
         official_level: "Tingkat resmi"
         phone_number: "Nomor telepon"
         public_activity: "Menjaga daftar kegiatan Umum"
-        redeemable_code: "Kode verifikasi diterima melalui surel"
       direct_message:
         title: "Judul"
         body: "Pesan"
@@ -446,8 +445,6 @@ id:
           attributes:
             document_number:
               not_in_census: "Dokumen tidak dalam sensus"
-            user_id:
-              has_voted: "Pengguna yang telah terpilih"
         legislation/process:
           attributes:
             end_date:

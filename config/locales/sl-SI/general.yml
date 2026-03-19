@@ -365,7 +365,6 @@ sl:
       forward:
         support_button: Podpri ta predlog
   polls:
-    all: "Vsi"
     dates: "Od %{open_at} do %{closed_at}"
     final_date: "Končni rezultati"
     index:
@@ -418,10 +417,6 @@ sl:
       results:
         title: "Vprašanja"
         most_voted_answer: "Najbolj izglasovan odgovor: "
-  poll_questions:
-    show:
-      vote_answer: "Glasuj %{answer}"
-      voted: "Glasoval/-a si %{answer}"
   proposal_notifications:
     new:
       title: "Pošlji sporočilo"

@@ -7,28 +7,15 @@ module WelcomeHelper
     "display: none;" if index.positive?
   end
 
-  def recommended_path(recommended)
-    case recommended.class.name
-    when "Debate"
-      debate_path(recommended)
-    when "Proposal"
-      proposal_path(recommended)
-    else
-      "#"
-    end
-  end
-
-  def render_recommendation_image(recommended, image_default)
-    image_path = calculate_image_path(recommended, image_default)
+  def render_recommendation_image(recommended)
+    image_path = calculate_image_path(recommended)
     image_tag(image_path) if image_path.present?
   end
 
-  def calculate_image_path(recommended, image_default)
+  def calculate_image_path(recommended)
     if recommended.respond_to?(:image) && recommended.image.present? &&
        recommended.image.attachment.attached?
       recommended.image.variant(:medium)
-    elsif image_default.present?
-      image_default
     end
   end
 

@@ -20,6 +20,8 @@ describe Abilities::Administrator do
   let(:future_poll) { create(:poll, :future) }
   let(:current_poll_question) { create(:poll_question) }
   let(:future_poll_question) { create(:poll_question, poll: future_poll) }
+  let(:future_poll_question_open) { create(:poll_question_open, poll: future_poll) }
+  let(:future_poll_question_option_open) { future_poll_question_open.question_options.new }
   let(:current_poll_question_option) { create(:poll_question_option) }
   let(:future_poll_question_option) { create(:poll_question_option, poll: future_poll) }
   let(:current_poll_option_video) { create(:poll_option_video, option: current_poll_question_option) }
@@ -115,7 +117,11 @@ describe Abilities::Administrator do
   it { should_not be_able_to(:admin_update, finished_investment) }
   it { should_not be_able_to(:valuate, finished_investment) }
   it { should_not be_able_to(:comment_valuation, finished_investment) }
-  it { should_not be_able_to(:toggle_selection, finished_investment) }
+
+  it { should be_able_to([:select, :deselect], create(:budget_investment, :feasible, :finished)) }
+  it { should_not be_able_to([:select, :deselect], create(:budget_investment, :feasible, :open)) }
+  it { should_not be_able_to([:select, :deselect], create(:budget_investment, :unfeasible, :finished)) }
+  it { should_not be_able_to([:select, :deselect], finished_investment) }
 
   it { should be_able_to(:destroy, proposal_image) }
   it { should be_able_to(:destroy, proposal_document) }
@@ -139,6 +145,9 @@ describe Abilities::Administrator do
   it { should_not be_able_to(:create, current_poll_question_option) }
   it { should_not be_able_to(:update, current_poll_question_option) }
   it { should_not be_able_to(:destroy, current_poll_question_option) }
+  it { should_not be_able_to(:create,  future_poll_question_option_open) }
+  it { should_not be_able_to(:update,  future_poll_question_option_open) }
+  it { should_not be_able_to(:destroy, future_poll_question_option_open) }
 
   it { should be_able_to(:create, future_poll_option_video) }
   it { should be_able_to(:update, future_poll_option_video) }
@@ -167,6 +176,10 @@ describe Abilities::Administrator do
   it { should be_able_to(:destroy, SDG::Manager) }
 
   it { should be_able_to(:manage, Widget::Card) }
+
+  it { should be_able_to(:create, Cookies::Vendor) }
+  it { should be_able_to(:update, Cookies::Vendor) }
+  it { should be_able_to(:destroy, Cookies::Vendor) }
 
   describe "tenants" do
     context "with multitenancy disabled" do

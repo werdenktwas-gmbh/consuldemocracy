@@ -12,6 +12,7 @@ class Poll::Question::Option < ApplicationRecord
 
   belongs_to :question, class_name: "Poll::Question"
   has_many :answers, class_name: "Poll::Answer", dependent: :nullify
+  has_many :partial_results, class_name: "Poll::PartialResult", dependent: :nullify
   has_many :videos, class_name: "Poll::Question::Option::Video",
                     dependent: :destroy,
                     foreign_key: "answer_id",
@@ -31,7 +32,7 @@ class Poll::Question::Option < ApplicationRecord
 
   def self.order_options(ordered_array)
     ordered_array.each_with_index do |option_id, order|
-      find(option_id).update_column(:given_order, (order + 1))
+      find(option_id).update_column(:given_order, order + 1)
     end
   end
 
@@ -40,8 +41,7 @@ class Poll::Question::Option < ApplicationRecord
   end
 
   def total_votes
-    Poll::Answer.where(question_id: question, answer: title).count +
-      ::Poll::PartialResult.where(question: question).where(answer: title).sum(:amount)
+    answers.count + partial_results.sum(:amount)
   end
 
   def open_text_answers
@@ -61,9 +61,13 @@ class Poll::Question::Option < ApplicationRecord
     description.present? || images.any? || documents.any? || videos.any?
   end
 
+  def possible_answers
+    translations.pluck(:title)
+  end
+
   private
     def validate_essay_question
-      if question.essay? && question.question_options.count > 1
+      if !question.accepts_options? && question.question_options.count > 1
         errors.add(:open_text, "can't create additional answer for question of type essay")
       end
     end
