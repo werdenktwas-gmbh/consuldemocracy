@@ -112,6 +112,8 @@ group :development do
   gem "rubocop-rspec_rails", "~> 2.31.0", require: false
   gem "rvm1-capistrano3", "~> 1.4.0", require: false
   gem "web-console", "~> 4.2.1"
+  gem "ed25519", ">= 1.2", "< 2.0"
+  gem "bcrypt_pbkdf", ">= 1.0", "< 2.0"
 end
 
 eval_gemfile "./Gemfile_custom"

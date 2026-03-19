@@ -24,3 +24,84 @@
         }
     }
 }
+
+
+
+.scroll-top {
+  --scrolltop-zindex: 1020;
+  --scrolltop-space: 20px;
+  // --scrolltop-bg: #494949;
+  // --scrolltop-color: #ffffff;
+  // --scrolltop-hover-bg: $brand;
+  // --scrolltop-hover-color: var(--button-background-hover, #14679e);
+  overflow: hidden;
+  z-index: var(--scrolltop-zindex);
+  bottom: var(--scrolltop-space);
+  right: var(--scrolltop-space);
+  position: fixed;
+  opacity: 0;
+  width: 3em;
+  height: 3em;
+  transition: all 0.3s ease-in-out;
+  border-radius: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-top {
+    transition: none;
+  }
+}
+// .scroll-top:active, .scroll-top:focus, .scroll-top:hover {
+//   color: var(--scrolltop-hover-color);
+//   background-color: var(--scrolltop-hover-bg);
+// }
+.scroll-top .scroll-top-icon {
+  transform: rotate(45deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+.scroll-top .scroll-top-icon:before {
+  content: "";
+  position: absolute;
+  height: 30%;
+  width: 30%;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  top: 55%;
+  left: 55%;
+  transform: translate(-50%, -50%);
+}
+.scroll-top.scroll-top-visible {
+  opacity: 1;
+}
+
+
+.scroll-top.scroll-top-visible {
+    opacity: 1;
+}
+
+
+// accessibility - don't use yellow text-color on active elements (cause white background)
+.submenu {
+  .is-active {
+    color: black;
+  }
+}
+.subnavigation a.is-active {
+    color: black;
+}
+
+
+// accessibility - top-bar to have other focus outline on yellow background
+.top-bar {
+    a:focus-visible, 
+    button:focus-visible, 
+    [type="button"]:focus-visible, 
+    [type="submit"]:focus-visible {
+        box-shadow: 0 0 0 6px rgba(34, 34, 34, 0.99);
+        outline: 3px solid rgba(34, 34, 34, 0.99);
+        outline-offset: 1px;
+    }
+}
