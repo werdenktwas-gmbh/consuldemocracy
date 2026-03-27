@@ -567,6 +567,9 @@ de:
   polls:
     dates: "Von %{open_at} bis %{closed_at}"
     final_date: "Endgültige Nachzählungen/Ergebnisse"
+    form:
+      vote: "Abstimmen"
+      maximum_exceeded: "Sie haben %{given} Antworten ausgewählt, das überschreitet das Maximum von %{maximum} Antworten"
     index:
       filters:
         current: "Offen"
@@ -597,6 +600,7 @@ de:
       comments_tab: Kommentare
       cant_answer_verify: "Sie müssen %{verify_link}, um zu antworten."
       verify_link: "Verifizieren Sie Ihr Benutzerkonto"
+      cant_answer_not_started: "Diese Umfrage ist noch nicht gestartet."
       cant_answer_expired: "Diese Umfrage wurde beendet."
       cant_answer_wrong_geozone: "Diese Frage ist nicht in ihrem Gebiet verfügbar."
       more_info_title: "Weitere Informationen"

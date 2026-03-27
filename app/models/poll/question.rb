@@ -69,13 +69,8 @@ class Poll::Question < ApplicationRecord
     votation_type.nil? || votation_type.unique?
   end
 
-# <<<<<<< HEAD
-#   def essay?
-#     votation_type.essay?
-# =======
   def accepts_options?
     votation_type.nil? || votation_type.accepts_options?
-# >>>>>>> origin/develop
   end
 
   def max_votes
@@ -133,16 +128,10 @@ class Poll::Question < ApplicationRecord
 
   private
 
-# <<<<<<< HEAD
-#     def find_by_attributes(user, option)
-#       case vote_type
-#       when "unique", "essay", nil
-# =======
     def find_by_attributes(user, option_id)
       if multiple?
         { author: user, option_id: option_id }
       else
-# >>>>>>> origin/develop
         { author: user }
       end
     end
@@ -154,7 +143,7 @@ class Poll::Question < ApplicationRecord
     end
 
     def validate_votation_type_essay
-      if !accepts_options? && question_options.count > 1 || question_options.where(open_text: false).count > 1
+      if !accepts_options? && ( question_options.count > 1 || question_options.where(open_text: false).count > 1 )
         errors.add(:votation_type, "can't change to type essay, multiple answers already exist on question")
       end
     end

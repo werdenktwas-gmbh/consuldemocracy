@@ -644,6 +644,10 @@ de:
           attributes:
             code:
               invalid: "muss mit dem gleichen Code wie sein Ziel beginnen, gefolgt von einem Punkt und mit einer Zahl enden"
+        votation_type:
+          attributes:
+            vote_type:
+              cannot_change_to_open_ended: "kann nicht zu Freitext geändert werden, weil bereits mehrere Antwortmöglichkeiten für die Frage erstellt wurden"
       messages:
         translations_too_short: Ist verpflichtet, mindestens eine Übersetzung zur Verfügung zu stellen
         record_invalid: "Validierung fehlgeschlagen: %{errors}"

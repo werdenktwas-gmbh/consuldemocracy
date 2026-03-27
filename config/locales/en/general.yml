@@ -616,6 +616,7 @@ en:
       comments_tab: Comments
       cant_answer_verify: "You must %{verify_link} in order to answer."
       verify_link: "verify your account"
+      cant_answer_not_started: "This poll hasn't started yet."
       cant_answer_expired: "This poll has finished."
       cant_answer_wrong_geozone: "This question is not available on your geozone."
       more_info_title: "More information"

@@ -24,7 +24,7 @@ class VotationType < ApplicationRecord
     end
 
     def cannot_be_open_ended_if_question_has_options
-      if questionable&.question_options&.any? && !accepts_options?
+      if questionable&.question_options&.count > 1 && !accepts_options?
         errors.add(:vote_type, :cannot_change_to_open_ended)
       end
     end

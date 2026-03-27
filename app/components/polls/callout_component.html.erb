@@ -15,6 +15,8 @@
     <%= callout(unverified_text) %>
   <% elsif poll.expired? %>
     <%= callout(t("polls.show.cant_answer_expired"), html_class: "alert") %>
+  <% elsif !poll.current? %>
+    <%= callout(t("polls.show.cant_answer_not_started")) %>
   <% else %>
     <%= callout(t("polls.show.cant_answer_wrong_geozone")) %>
   <% end %>
