@@ -15,7 +15,7 @@ class ProjectsController < ApplicationController
 
   def show
 
-    if not @project.published?
+    if (!current_user or !current_user.administrator?) and not @project.published?
       raise ActiveRecord::RecordNotFound
     end
     @cards = @project.cards.sort_by_order
