@@ -1663,6 +1663,7 @@ de:
         processes: Beteiligungsverfahren
         active_projects: "Aktive Projekte"
         archived_projects: "Archivierte Projekte"
+        polls: "Umfragen"
       new:
         header_title: Neue Kopfzeile
         submit_header: Kopfzeile erstellen

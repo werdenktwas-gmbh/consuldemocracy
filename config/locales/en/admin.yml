@@ -1707,6 +1707,7 @@ en:
         processes: Processes
         active_projects: "Active projects"
         archived_projects: "Archived projects"
+        polls: "Polls"
       new:
         header_title: New header
         submit_header: Create header
