@@ -76,7 +76,8 @@
       grid-template-columns: min-content max-content auto;
       column-gap: 0.5em;
 
-      input.open_text_field {
+      input.open_text_field,
+      textarea.open_text_field {
         max-width:100%;
         width:20rem;
       }
