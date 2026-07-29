@@ -75,6 +75,7 @@ class Poll < ApplicationRecord
   scope :public_for_api, -> { all }
   scope :not_budget, -> { where(budget_id: nil) }
   scope :created_by_admin, -> { where(related_type: nil) }
+  scope :started, -> { where(starts_at: ..Time.current) }
 
   def self.sort_for_list(user = nil)
     all.sort do |poll, another_poll|

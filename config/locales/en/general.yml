@@ -867,18 +867,25 @@ en:
         processes: "Open processes"
         active_projects: "Active projects"
         archived_projects: "Archived projects"
+        polls: "Polls"
       see_all:
         debates: See all debates
         proposals: See all proposals
         processes: See all processes
         active_projects: "See all active projects"
         archived_projects: "See all archived projects"
+        polls: "See all polls"
       no_items:
         debates: There are no debates right now
         proposals: There are no proposals right now
         processes: There are no open processes right now
         active_projects: "There are no active projects right now"
         archived_projects: "There are no archived projects right now"
+        polls: "There are no polls right now"
+      polls: 
+        status:
+          current: "Current poll"
+          expired: "Expired poll"
       process_label: Process
       see_process: See process
     cards:

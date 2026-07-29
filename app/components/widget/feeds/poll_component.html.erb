@@ -1,0 +1,15 @@
+<div id="<%= dom_id(poll) %>" class="poll-card card small-12 medium-4 column margin-bottom end">
+  <%= link_to url_for(poll) do %>
+    <figure class="figure-card">
+      <div class="gradient"></div>
+      <% if poll.image.present? %>
+        <%= image_tag(poll.image.variant(:large), alt: poll.image.title) %>
+      <% end %>
+      <figcaption>
+        <h3><%= poll.title %></h3>
+      </figcaption>
+    </figure>
+    <p class="description"><%= poll.summary %></p>
+    <p class="status text-right small"><%= poll.current? ? t('welcome.feed.polls.status.current') : t('welcome.feed.polls.status.expired') %></p>
+  <% end %>
+</div>

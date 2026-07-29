@@ -9,7 +9,9 @@
 
       <h1><%= poll.name %></h1>
 
-      <%= auto_link_already_sanitized_html simple_format(poll.summary) %>
+      <div class="poll-teaser-summary">
+        <%= auto_link_already_sanitized_html simple_format(poll.summary) %>
+      </div>
 
       <%# WDW add poll-description from app/views/custom/polls/show.html.erb %>
       <div class="expanded poll-more-info">

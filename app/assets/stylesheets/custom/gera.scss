@@ -105,3 +105,23 @@
         outline-offset: 1px;
     }
 }
+
+// homepage banner reduce size
+.home-page {
+    .header-card.jumbo {
+        padding:1rem 0;
+        h1 {
+            font-size:1.8rem;
+        }
+        p.lead {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// more distinct border between teaser + description
+.polls-show-header {
+    .poll-more-info {
+      border-top: 1px solid #ddd;
+    }
+}

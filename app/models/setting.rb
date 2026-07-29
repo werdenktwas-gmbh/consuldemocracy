@@ -97,6 +97,7 @@ class Setting < ApplicationRecord
         "homepage.widgets.feeds.debates": true,
         "homepage.widgets.feeds.processes": true,
         "homepage.widgets.feeds.proposals": true,
+        "homepage.widgets.feeds.polls": false,
         "homepage.widgets.feeds.active_projects": false,
         "homepage.widgets.feeds.archived_projects": false,
         # Code to be included at the top (inside <body>) of every page

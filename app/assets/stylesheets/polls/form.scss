@@ -25,8 +25,7 @@
       @include radio-or-checkbox-and-label-alignment;
       font-weight: normal;
 
-      &:first-of-type::before {
-        content: "\A";
+      &:first-of-type {
         margin-top: calc($line-height / 2);
         white-space: pre;
       }
@@ -59,7 +58,33 @@
     }
   }
 
+  input.open_text_field {
+    margin-left:0.8rem;
+  }
+
   [type=submit] {
     margin-top: calc($line-height * 3 / 4);
+  }
+
+
+  @include breakpoint(medium) {
+
+    /* use CSS Grid/Subgrid for flexible layout of questions with possible open-text inline
+     */
+    .poll-questions-grid {
+      display:grid;
+      grid-template-columns: min-content max-content auto;
+      column-gap: 0.5em;
+
+      input.open_text_field {
+        max-width:100%;
+        width:20rem;
+      }
+    }
+    fieldset .poll-questions-grid label {
+      grid-column: 1 / -1;
+      display:grid;
+      grid-template-columns: subgrid;
+    }
   }
 }

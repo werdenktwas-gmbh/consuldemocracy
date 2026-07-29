@@ -1,0 +1,11 @@
+<% if Setting["homepage.widgets.feeds.polls"].present? %>
+  <div class="large-12 column">
+	<div class="feeds-list">
+	  <% @feeds.each do |feed| %>
+	    <% if feed_polls?(feed) %>
+	      <%= render Widget::Feeds::FeedComponent.new(feed) %>
+	    <% end %>
+	  <% end %>
+	</div>
+  </div>
+<% end %>
