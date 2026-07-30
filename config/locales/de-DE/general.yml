@@ -841,18 +841,25 @@ de:
         processes: "Laufende Verfahren"
         active_projects: "Aktive Projekte"
         archived_projects: "Archivierte Projekte"
+        polls: "Umfragen"
       see_all:
         debates: Alle Debatten anzeigen
         proposals: Alle Vorschläge anzeigen
         processes: Alle Beteiligungsverfahren anzeigen
         active_projects: "Alle aktiven Projekte anzeigen"
         archived_projects: "Alle archivierten Projekte anzeigen"
+        polls: "Alle Umfragen anzeigen"
       no_items:
         debates: Aktuell gibt es keine Diskussionen
         proposals: Aktuell gibt es keine Vorschläge
         processes: Aktuell gibt es keine laufende Prozesse
         active_projects: "Aktuell gibt es keine aktiven Projekte"
         archived_projects: "Aktuell gibt es keine archivierten Projekte"
+        polls: "Aktuell gibt es keine Umfragen"
+      polls: 
+        status:
+          current: "Abstimmung offen"
+          expired: "Abstimmung beendet"
       process_label: Beteiligungsverfahren
       see_process: Beteiligungsverfahren anzeigen
     cards:

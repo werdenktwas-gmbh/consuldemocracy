@@ -22,6 +22,8 @@ class Widget::Feeds::FeedComponent < ApplicationComponent
         Widget::Feeds::ProcessComponent
       when "active_projects", "archived_projects"
         Widget::Feeds::ProjectComponent
+      when "polls"
+        Widget::Feeds::PollComponent
       end
     end
 
