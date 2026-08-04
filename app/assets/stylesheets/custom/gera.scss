@@ -125,3 +125,8 @@
       border-top: 2px solid #ddd;
     }
 }
+
+.feed-content {
+    display: flex;
+    flex-wrap: wrap;
+}
