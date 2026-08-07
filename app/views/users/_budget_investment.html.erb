@@ -1,6 +1,10 @@
 <tr id="budget_investment_<%= budget_investment.id %>">
   <td>
-    <%= link_to budget_investment.title, budget_investment_path(budget_investment.budget, budget_investment) %>
+    <% if budget_investment.budget.present? %>
+      <%= link_to budget_investment.title, budget_investment_path(budget_investment.budget, budget_investment) %>
+    <% else %>
+      <%= budget_investment.title %>
+    <% end %>
   </td>
   <td>
     <%= render Users::BudgetInvestmentTableActionsComponent.new(budget_investment) %>
