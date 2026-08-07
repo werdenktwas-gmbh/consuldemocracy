@@ -92,6 +92,11 @@
 .subnavigation a.is-active {
     color: black;
 }
+.menu.simple li.is-active::selection, 
+.menu.simple li.is-active ::selection,
+.menu.simple li.is-active {
+    color: black;
+}
 
 
 // accessibility - top-bar to have other focus outline on yellow background
@@ -169,4 +174,12 @@
 .active-phase em,
 .active-phase i {
   font-style: italic;
+}
+
+
+// highlight active tab with primary colour
+ul.key-dates {
+    li.is-active {
+        background-color: var(--primary);
+    }
 }

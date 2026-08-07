@@ -23,6 +23,17 @@
   }
 }
 
-.project-phase-list .key-dates{
+.project-phase-list ul.key-dates{
   line-height: $line-height * 0.7;
+
+  display:flex;
+  flex-wrap:wrap;
+
+  li {
+    max-width:450px;
+
+    h4 {
+      line-height: 1rem;
+    }
+  }
 }

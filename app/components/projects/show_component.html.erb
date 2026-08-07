@@ -25,9 +25,9 @@
 	      <% @project.phases.enabled.sort_by_order.each do |project_phase| %>
 	        <li <%= "class=is-active" if @active_phase.present? && project_phase == @active_phase %>>
 	          <%= link_to project_path(id: @project, phase: project_phase.id) do %>
-	            <h4><%= project_phase.title_short %></h4>
-            	<span><i><%= project_phase.subtitle %></i></span><br/>
-            	<span><%= format_date(project_phase.starts_at) %> - <%= format_date(project_phase.ends_at) %></span>
+	            <h4 class="top-aligned"><%= project_phase.title_short %></h4>
+            	<span class="bottom-aligned"><i><%= project_phase.subtitle %></i></span><br/>
+            	<span class="bottom-aligned"><%if(project_phase.starts_at || project_phase.ends_at)%><%= format_date(project_phase.starts_at) %> - <%= format_date(project_phase.ends_at) %><%end%></span>
 	          <% end %>
 	        </li>
 	      <% end %>
